@@ -55,15 +55,27 @@ pander(summary(data))
 # Condition météo
 
 ```{r, echo=TRUE}
-pluvio <- read_excel("Sorgho20_21_22_CIPF.xlsx",sheet = "pluvio")
-temp <- read_excel("Sorgho20_21_22_CIPF.xlsx",sheet = "temp")
+meteo <- read_excel("Sorgho20_21_22_CIPF.xlsx",sheet = "pluvio_temp")
 
+scalefactor <- max(meteo$mean_rain)/max(meteo$mean_temp)
+ggplot(data=meteo,aes(x=Mois))+
+  facet_wrap(~annee)+
+  geom_col(aes(y=mean_rain,width=0.5),fill='blue')+
+  geom_line(aes(y=mean_temp,width=2),col='red')+
+  scale_y_continuous(name='pluviometrie',sec.axis = sec_axis(~./scalefactor,name="temperature"))+
+  theme(
+    axis.title.y.left=element_text(color="blue"),
+    axis.text.y.left=element_text(color="blue"),
+    axis.title.y.right=element_text(color="red"),
+    axis.text.y.right=element_text(color="red")
+  ) +
+  labs(title = "Temperature et pluviometrie", x = element_blank())
 ```
 
 # Inference sur les varietes
 
 ```{r, echo=TRUE}
-ggplot(data,aes(x=variete,y=rendement_MS))+
+ggplot(data=data,aes(x=variete,y=rendement_MS))+
   geom_bar(stat = 'identity')+ facet_wrap(~annee)+
   labs(x='Variété',
        y='rendement [T/ha]')
