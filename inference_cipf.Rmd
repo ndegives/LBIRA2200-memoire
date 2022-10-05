@@ -57,19 +57,26 @@ pander(summary(data))
 ```{r, echo=TRUE}
 meteo <- read_excel("Sorgho20_21_22_CIPF.xlsx",sheet = "pluvio_temp")
 
-scalefactor <- max(meteo$mean_rain)/max(meteo$mean_temp)
+mean_culture_rain <- c(
+  mean((subset(meteo,annee==2020)$mean_rain)),
+  mean((subset(meteo,annee==2021)$mean_rain)),
+  mean((subset(meteo,annee==2022)$mean_rain))
+)
+mean_culture_rain <- data.frame(c(2020,2021,2022),mean_culture_rain)
+
+#Plot precipitation
 ggplot(data=meteo,aes(x=Mois))+
   facet_wrap(~annee)+
-  geom_col(aes(y=mean_rain,width=0.5),fill='blue')+
-  geom_line(aes(y=mean_temp,width=2),col='red')+
-  scale_y_continuous(name='pluviometrie',sec.axis = sec_axis(~./scalefactor,name="temperature"))+
-  theme(
-    axis.title.y.left=element_text(color="blue"),
-    axis.text.y.left=element_text(color="blue"),
-    axis.title.y.right=element_text(color="red"),
-    axis.text.y.right=element_text(color="red")
-  ) +
-  labs(title = "Temperature et pluviometrie", x = element_blank())
+  geom_col(aes(y=mean_rain),width=0.5,fill='blue')+
+  geom_hline(yintercept = mean(meteo$mean_rain))+
+  labs(title = "Temperature et pluviometrie")
+
+#Plot temperature
+ggplot(data = meteo, aes(x=Mois))+
+  facet_wrap(~annee)+
+  geom_col(aes(y=mean_temp,width=0.5),fill='red')+
+  labs(title='Temperature')
+
 ```
 
 # Inference sur les varietes
