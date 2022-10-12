@@ -68,7 +68,6 @@ mean_culture_rain <- data.frame(c(2020,2021,2022),mean_culture_rain)
 ggplot(data=meteo,aes(x=Mois))+
   facet_wrap(~annee)+
   geom_col(aes(y=mean_rain),width=0.5,fill='blue')+
-  geom_hline(yintercept = mean(meteo$mean_rain))+
   labs(title = "Temperature et pluviometrie")
 
 #Plot temperature
@@ -88,3 +87,12 @@ ggplot(data=data,aes(x=variete,y=rendement_MS))+
        y='rendement [T/ha]')
 ```
 
+# Rendement des genotype par annee
+
+```{r, echo=TRUE}
+ggplot(data=data,aes(x=as.factor(annee),y=rendement_MS))+
+  geom_bar(stat='identity')+
+  facet_wrap(~variete)+
+  labs(x='annee',
+       y='rendement')
+```
