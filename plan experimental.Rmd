@@ -36,5 +36,6 @@ library(htmltools)
 # A
 
 ```{r, echo=TRUE}
-
+data<- read_excel("Sorgho20_21_22_CIPF.xlsx")
+head(data)
 ```

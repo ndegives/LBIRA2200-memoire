@@ -68,7 +68,7 @@ mean_culture_rain <- data.frame(c(2020,2021,2022),mean_culture_rain)
 ggplot(data=meteo,aes(x=Mois))+
   facet_wrap(~annee)+
   geom_col(aes(y=mean_rain),width=0.5,fill='blue')+
-  labs(title = "Temperature et pluviometrie")
+  labs(title = "Pluviometrie")
 
 #Plot temperature
 ggplot(data = meteo, aes(x=Mois))+
