@@ -76,6 +76,20 @@ ggplot(data = meteo, aes(x=Mois))+
   geom_col(aes(y=mean_temp,width=0.5),fill='red')+
   labs(title='Temperature')
 
+#Diagramme ombrothermique
+Mois = c('06/20','07/20','08/20','09/20','10/20',
+         '06/21','07/21','08/21','09/21','10/21',
+         '06/22','07/22','08/22','09/22','10/22')
+plot.new()
+par(mar=c(4,4,3,4))
+position=barplot(meteo$mean_rain,col='cyan',names.arg = Mois,axes=F,ylab="",xlab="",main="Precipitation et température",ylim=c(0,200))
+axis(2,col="black",at=seq(0, 200, by=25))
+par(new=TRUE,mar=c(4,4,3,4))
+maximal = max(position)+(position[2]-position[1])
+plot(position,meteo$mean_temp,col="red",type="o",lwd=2,pch=16,axes=F,ylab="",xlab="",ylim=c(0,25), xlim=c(0,length(meteo$mean_temp)),yaxs ="i")
+axis(4,col.axis='red',col='red')
+box();grid()
+
 ```
 
 # Inference sur les varietes
