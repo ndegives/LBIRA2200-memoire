@@ -47,7 +47,7 @@ head(data)
 ## Sort the columns
 
 ```{r, echo=TRUE}
-cols_to_remove <- c('date_semis','date_recolte','lieu','precedent','traitement_semences','densite_semis')
+cols_to_remove <- c('date_semis','date_recolte','lieu','precedent','traitement_semences','densite_semis','type_sorgho')
 data <- data[, ! names(data) %in% cols_to_remove, drop = F]
 data$variete <- as.factor(data$variete)
 data$annee <- as.factor(data$annee)
@@ -94,15 +94,26 @@ box();grid()
 
 ```
 
+# Rendement et pourcentage MS
+
+```{r, echo=TRUE}
+# Plot général
+ggplot(data=subset(data,annee==2021),aes(x=`%MS`,y=rendement_MS, color=variete)) + geom_point(alpha = 1, size=3) + 
+               labs(color = "Variety", 
+                    x= "% Dry matter",
+                    y= "Dry matter yield [t/ha]",
+                    title="Yield")
+```
+
 # Observation des rendements en fonction de l'année et de la variétée
 
 ```{r, echo=TRUE}
 # Plot général
-ggplot(data,aes(x=annee,y=rendement_MS, color=variete)) + geom_point(alpha = 0.5, size=3) + 
-               labs(color = "Variété", 
-                    x= "Année",
-                    y= "Rendement_MS",
-                    title="Rendement par année et par variété")
+ggplot(data,aes(x=annee,y=rendement_MS, color=variete)) + geom_point(alpha = 0.8, size=3) + 
+               labs(color = "Variety", 
+                    x= "Year",
+                    y= "Dry matter yield [t/ha]",
+                    title="Yield by year and variety")
 # Barplot séparé par année
 ggplot(data=data,aes(x=variete,y=rendement_MS))+
   geom_bar(stat = 'identity',aes(fill=variete))+
