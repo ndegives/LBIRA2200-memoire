@@ -1,27 +1,27 @@
 {
-    "id": "5FABB7A9",
-    "path": "C:/Nico/Github/Memoire/End_growth_root_data/racine.Rmd",
-    "project_path": "End_growth_root_data/racine.Rmd",
+    "id": "2DD09647",
+    "path": "C:/Nico/Github/Memoire/Aerials data/inference_cipf.Rmd",
+    "project_path": "Aerials data/inference_cipf.Rmd",
     "type": "r_markdown",
-    "hash": "977360989",
+    "hash": "741634757",
     "contents": "",
     "dirty": false,
-    "created": 1677010275058.0,
+    "created": 1678193859592.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 1,
     "properties": {
         "chunk_output_type": "console",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "105,0",
-        "scrollLine": "84"
+        "cursorPosition": "180,0",
+        "scrollLine": "168"
     },
     "folds": "",
-    "lastKnownWriteTime": 1677022086,
+    "lastKnownWriteTime": 1678195081,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1677022086953,
+    "last_content_update": 1678195081708,
     "read_only": false,
     "read_only_alternatives": []
 }
