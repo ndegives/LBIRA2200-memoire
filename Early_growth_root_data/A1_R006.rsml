@@ -97,6 +97,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.5504442</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5228.102' y='847.4138'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='7262b0de-f82a-4de2-99b7-60695f3146aa' label='N3.2' po:accession='PO:0009005'>
@@ -220,6 +227,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.4490963</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5127.374' y='946.0106'/>
+				    <value>8</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='2995e0f0-0bd4-4154-be47-11846a44885d' label='N2.2' po:accession='PO:0009005'>
@@ -294,6 +308,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.3340073</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5125.9185' y='987.5684'/>
+				    <value>8</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='38032417-2bac-4176-bd9c-51948c18caaa' label='N3.1' po:accession='PO:0009005'>
@@ -345,6 +366,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5628.396' y='1058.6957'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>4.206464</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5199.9033' y='917.06146'/>
+				    <value>8</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -415,6 +443,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.00797</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5142.4136' y='830.7105'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='8b5a671a-a93b-49ae-8aa6-841dcac48dd8' label='N2.1' po:accession='PO:0009005'>
@@ -466,6 +501,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5505.8657' y='1270.8315'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>4.013115</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5199.7188' y='1009.3206'/>
+				    <value>8</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -531,6 +573,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5534.062' y='1399.9518'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.6398495</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5156.34' y='1056.4746'/>
+				    <value>8</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -684,6 +733,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='3890.5442' y='2501.498'/>
 				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>0.10129482</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5087.4575' y='1031.4227'/>
+				    <value>8</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1175,13 +1231,6 @@
 					</function>
 				</functions>
 				<annotations>
-				  <annotation name='Most Distal Lateral'>
-				    <lPos>7690.0073</lPos>
-				    <twinLPos>0.0</twinLPos>
-				    <point x='4684.5845' y='8693.145'/>
-				    <value>0</value>
-				    <software>smartroot</software>
-				  </annotation>
 				  <annotation name='Free Text'>
 				    <lPos>919.47217</lPos>
 				    <twinLPos>0.0</twinLPos>
@@ -1215,6 +1264,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4735.2456' y='9110.834'/>
 				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.5255904</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4972.5586' y='1125.2085'/>
+				    <value>0</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1278,6 +1334,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.9077555</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4702.473' y='8692.867'/>
+				    <value>13</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='0680ffbc-55d7-4b39-9eb3-e4b240601d5d' label='lat_22' po:accession='PO:0009005'>
@@ -1326,6 +1389,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4611.336' y='8057.5386'/>
 				    <value>18</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.9977041</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4711.5625' y='7962.449'/>
+				    <value>12</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1381,6 +1451,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>4.152313</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4802.7876' y='7749.563'/>
+				    <value>12</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='a9a145f5-2ee0-4c8e-bdf4-1f89b5be024a' label='lat_20' po:accession='PO:0009005'>
@@ -1429,6 +1506,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4949.9497' y='7544.373'/>
 				    <value>18</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.106896</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4797.8374' y='7577.2715'/>
+				    <value>12</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1500,6 +1584,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4524.146' y='5890.9043'/>
 				    <value>18</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.8450372</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4693.2656' y='5634.729'/>
+				    <value>10</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1590,6 +1681,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.5896053</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4736.4775' y='5582.094'/>
+				    <value>10</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='808a9ff5-54ee-404a-950e-f53cc3848a84' label='lat_17' po:accession='PO:0009005'>
@@ -1625,6 +1723,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4566.9043' y='5041.7734'/>
 				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>4.6300898</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4712.413' y='5108.4014'/>
+				    <value>10</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1693,6 +1798,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4407.7397' y='3879.387'/>
 				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.4805219</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4880.269' y='3736.9578'/>
+				    <value>8</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -1904,6 +2016,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.8670194</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4944.3594' y='2839.816'/>
+				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='f8da33cd-1adc-4482-94f8-06cb229f7c21' label='lat_14' po:accession='PO:0009005'>
@@ -2018,6 +2137,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.3179345</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5037.131' y='2779.8582'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='9b2ba0a7-47bc-4119-9c90-6fdf90e1be1c' label='lat_13' po:accession='PO:0009005'>
@@ -2109,6 +2235,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5271.9395' y='3401.395'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.0806944</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5027.5317' y='2676.92'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2276,6 +2409,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.618685</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4957.917' y='2600.6248'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='0d8bd717-3052-46ec-b19d-ee67be5bb9c0' label='lat_11' po:accession='PO:0009005'>
@@ -2354,6 +2494,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5294.838' y='2992.2122'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.3729681</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5016.211' y='2635.331'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2446,6 +2593,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4499.627' y='2992.9646'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.9814477</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4965.2593' y='2366.1602'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2553,6 +2707,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.3038685</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5042.649' y='2198.1885'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='d8e15b90-6a47-4b9a-b04c-ee9e49df6104' label='lat_8' po:accession='PO:0009005'>
@@ -2637,6 +2798,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5404.128' y='2647.0054'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.3717793</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5019.272' y='2119.213'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2738,6 +2906,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4528.549' y='2854.924'/>
 				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.8837574</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4971.4683' y='2077.9824'/>
+				    <value>3</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2886,6 +3061,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.238091</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4952.6143' y='1974.4141'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='01e68c1d-eaa8-4f57-9d3c-aca28f4f2b65' label='lat_5' po:accession='PO:0009005'>
@@ -3006,6 +3188,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.0223103</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4935.254' y='1777.1016'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='47b6d44f-30f6-42cb-9893-0ca9bced6dff' label='lat_4' po:accession='PO:0009005'>
@@ -3047,6 +3236,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4812.4385' y='1739.197'/>
 				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.7948713</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4954.5483' y='1647.5659'/>
+				    <value>3</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -3109,6 +3305,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5279.0693' y='1770.6022'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.8790159</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5009.399' y='1680.2222'/>
+				    <value>3</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -3176,6 +3379,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.3248408</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5017.2563' y='1597.3861'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='a3f5fd40-4498-4a59-bce0-7984841290b0' label='lat_1' po:accession='PO:0009005'>
@@ -3223,13 +3433,20 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.9534163</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4962.5728' y='1565.9972'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='e08a66e1-bdee-4593-bbaf-08b66202069f' label='lat_1' po:accession='PO:0009005'>
 				<properties>
   <rulerAtOrigin>0.0</rulerAtOrigin>
-					<length>0.3942676</length>
-					<orientation>5.478993</orientation>
+					<length>0.43576902</length>
+					<orientation>5.4939384</orientation>
 					<insertion>1.5357548</insertion>
 					<angle>46.945310844845</angle>
 				</properties>
@@ -3239,8 +3456,8 @@
 						<point x='5033.0' y='1875.5'/>
 						<point x='5055.5' y='1900.0'/>
 						<point x='5076.0' y='1922.5'/>
-						<point x='5113.0' y='1955.5'/>
-						<point x='5142.0' y='1989.5'/>
+						<point x='5114.5' y='1953.5'/>
+						<point x='5157.5' y='2001.5'/>
 					</polyline>
 				</geometry>
 				<functions>
@@ -3256,12 +3473,26 @@
 						<sample>5.514939</sample>
 						<sample>5.45526</sample>
 						<sample>5.451309</sample>
-						<sample>5.5548677</sample>
-						<sample>5.418588</sample>
+						<sample>5.6052847</sample>
+						<sample>5.4428973</sample>
 						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
+				  <annotation name='Free Text'>
+				    <lPos>1.0981073</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5016.5645' y='1853.3632'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>205.13023</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5160.3535' y='1997.9434'/>
+				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='68113cc1-7b54-4578-b0dd-c26f7c8378ed' label='lat_4' po:accession='PO:0009005'>
@@ -3312,6 +3543,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4608.7305' y='3198.041'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.2829359</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4967.0938' y='2655.8848'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -3366,6 +3604,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>0.48749238</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5011.9307' y='2611.8413'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='f4675c73-358f-4a43-bbdb-30c2d8b12c35' label='lat_2' po:accession='PO:0009005'>
@@ -3410,6 +3655,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='4689.5' y='2864.5'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.5081244</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4957.3374' y='2466.7678'/>
+				    <value>4</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>

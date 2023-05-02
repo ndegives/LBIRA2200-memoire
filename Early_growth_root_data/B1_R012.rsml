@@ -80,7 +80,7 @@
 						<sample>5.0086145</sample>
 						<sample>5.05027</sample>
 						<sample>4.925031</sample>
-						<sample>4.456795</sample>
+						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
@@ -114,7 +114,7 @@
 						<sample>4.6568866</sample>
 						<sample>4.6565466</sample>
 						<sample>4.838308</sample>
-						<sample>2.1787884</sample>
+						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
@@ -148,7 +148,7 @@
 						<sample>4.204673</sample>
 						<sample>4.179985</sample>
 						<sample>4.234038</sample>
-						<sample>3.5935445</sample>
+						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
@@ -159,8 +159,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>14.479651</length>
 					<orientation>4.7755384</orientation>
-					<lbuz>0.0</lbuz>
-					<lauz>14.331238</lauz>
+					<lbuz>0.0940714</lbuz>
+					<lauz>14.3232765</lauz>
 				</properties>
 				<geometry>
 					<polyline>
@@ -578,6 +578,13 @@
 					</function>
 				</functions>
 				<annotations>
+				  <annotation name='Most Distal Lateral'>
+				    <lPos>6766.9023</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4999.434' y='8013.413'/>
+				    <value>0</value>
+				    <software>smartroot</software>
+				  </annotation>
 				  <annotation name='Free Text'>
 				    <lPos>795.96936</lPos>
 				    <twinLPos>0.0</twinLPos>
@@ -606,10 +613,10 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
-				  <annotation name='Most Distal Lateral'>
-				    <lPos>6770.6636</lPos>
+				  <annotation name='Free Text'>
+				    <lPos>5.7204685</lPos>
 				    <twinLPos>0.0</twinLPos>
-				    <point x='4999.8335' y='8017.1533'/>
+				    <point x='4638.0547' y='1500.7429'/>
 				    <value>0</value>
 				    <software>smartroot</software>
 				  </annotation>
@@ -619,8 +626,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>2.0711937</length>
 					<orientation>5.301743</orientation>
-					<insertion>14.331238</insertion>
-					<angle>36.19005784563604</angle>
+					<insertion>14.3232765</insertion>
+					<angle>28.477626800911082</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -697,6 +704,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.8203747</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5032.195' y='7996.493'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='d60fbba2-ef10-4c74-a746-fabf5533be43' label='lat_27' po:accession='PO:0009005'>
@@ -704,8 +718,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>2.2342618</length>
 					<orientation>5.299299</orientation>
-					<insertion>14.177707</insertion>
-					<angle>24.69367467996734</angle>
+					<insertion>14.206507</insertion>
+					<angle>20.322053082835698</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -785,6 +799,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.4246736</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5033.514' y='7952.138'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='e464a42e-12c6-42c9-a3bb-f1c9f5204a53' label='lat_25' po:accession='PO:0009005'>
@@ -792,8 +813,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.5390021</length>
 					<orientation>3.6971955</orientation>
-					<insertion>13.354687</insertion>
-					<angle>48.16172655488925</angle>
+					<insertion>13.254458</insertion>
+					<angle>53.909931798101944</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -831,6 +852,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.5945373</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5026.4175' y='7524.7095'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='9fc639d6-a8bf-4007-b404-9ff736922b7f' label='lat_24' po:accession='PO:0009005'>
@@ -838,8 +866,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.0014985</length>
 					<orientation>3.3703134</orientation>
-					<insertion>12.986413</insertion>
-					<angle>65.19031706145816</angle>
+					<insertion>12.873233</insertion>
+					<angle>72.493565133386</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -889,6 +917,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.2054398</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5051.3027' y='7337.18'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='d7f5a424-7808-45be-bfab-be7c6e4a455f' label='lat_23' po:accession='PO:0009005'>
@@ -896,8 +931,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.0642279</length>
 					<orientation>3.5265937</orientation>
-					<insertion>12.526897</insertion>
-					<angle>53.90946734523838</angle>
+					<insertion>12.426872</insertion>
+					<angle>60.08035201504814</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -950,6 +985,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.8476367</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5085.395' y='7140.534'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='4b51914f-18fa-408f-8804-7cff42058188' label='lat_22' po:accession='PO:0009005'>
@@ -957,8 +999,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.8665393</length>
 					<orientation>6.021098</orientation>
-					<insertion>12.404985</insertion>
-					<angle>103.05668091433375</angle>
+					<insertion>12.27768</insertion>
+					<angle>96.50226746224943</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1005,6 +1047,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.0259056</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5160.391' y='7057.904'/>
+				    <value>14</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='8fa68180-6107-42dc-83c8-f5fbf45d160e' label='lat_21' po:accession='PO:0009005'>
@@ -1012,8 +1061,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>3.5547926</length>
 					<orientation>5.3244424</orientation>
-					<insertion>11.085754</insertion>
-					<angle>70.9742715147867</angle>
+					<insertion>10.976035</insertion>
+					<angle>66.37285503321915</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1126,6 +1175,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.7519238</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5270.743' y='6455.487'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='a04abf8e-e078-4e14-8b11-da0f162d4a6f' label='lat_20' po:accession='PO:0009005'>
@@ -1133,8 +1189,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.96535796</length>
 					<orientation>3.8072214</orientation>
-					<insertion>10.870218</insertion>
-					<angle>59.6406517570394</angle>
+					<insertion>10.876988</insertion>
+					<angle>45.73528819186388</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1184,6 +1240,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.2909869</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5219.2026' y='6415.1694'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='e1459ce4-b1f8-4feb-83ff-0bb55304c5fb' label='lat_19' po:accession='PO:0009005'>
@@ -1191,8 +1254,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.609711</length>
 					<orientation>6.089646</orientation>
-					<insertion>7.9503665</insertion>
-					<angle>69.29123094102552</angle>
+					<insertion>7.912061</insertion>
+					<angle>73.32970323120061</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1233,6 +1296,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.5215787</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5481.126' y='5033.9326'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='cbf14d0f-351f-483b-b217-00bffe4bf447' label='lat_18' po:accession='PO:0009005'>
@@ -1240,8 +1310,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.82278705</length>
 					<orientation>3.2699268</orientation>
-					<insertion>7.845019</insertion>
-					<angle>89.88705166617366</angle>
+					<insertion>7.7507014</insertion>
+					<angle>95.75927948433545</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1285,6 +1355,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.289941</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5420.435' y='4993.3145'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='7486a048-cdf5-4528-8427-ce9acd92c95a' label='lat_17' po:accession='PO:0009005'>
@@ -1292,8 +1369,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.0915308</length>
 					<orientation>3.51467</orientation>
-					<insertion>7.495099</insertion>
-					<angle>76.71847426714577</angle>
+					<insertion>7.61665</insertion>
+					<angle>78.07264123237083</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1349,6 +1426,13 @@
 				    <value>18</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.0</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5420.5' y='4912.2515'/>
+				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='22cfba0b-1908-429e-ad1e-07efcea9830c' label='lat_16' po:accession='PO:0009005'>
@@ -1356,8 +1440,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.5347683</length>
 					<orientation>5.514666</orientation>
-					<insertion>7.2982783</insertion>
-					<angle>53.840564396891295</angle>
+					<insertion>7.3352504</insertion>
+					<angle>67.55857587313336</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1425,6 +1509,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.0890552</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5482.3677' y='4751.964'/>
+				    <value>8</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='9f1eb143-fe26-4b51-bcf6-6d2fbdea8a83' label='lat_15' po:accession='PO:0009005'>
@@ -1432,8 +1523,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.6617124</length>
 					<orientation>5.5455623</orientation>
-					<insertion>6.960308</insertion>
-					<angle>74.32641907640223</angle>
+					<insertion>6.9452257</insertion>
+					<angle>75.9614297599199</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1498,6 +1589,13 @@
 				    <value>14</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>0.033857297</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5498.491' y='4580.4507'/>
+				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='7c35bb12-3f81-41d3-9bdd-590504415487' label='lat_14' po:accession='PO:0009005'>
@@ -1505,8 +1603,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.86035067</length>
 					<orientation>5.2887235</orientation>
-					<insertion>3.8767483</insertion>
-					<angle>28.760232708009532</angle>
+					<insertion>3.7361653</insertion>
+					<angle>17.2589591268951</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1550,6 +1648,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.8527687</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5308.244' y='3111.7285'/>
+				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='ab07b5d8-7575-4645-a526-cae7d1dc1a28' label='lat_13' po:accession='PO:0009005'>
@@ -1557,8 +1662,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.898568</length>
 					<orientation>4.4661503</orientation>
-					<insertion>2.802173</insertion>
-					<angle>33.217450235819776</angle>
+					<insertion>2.7958543</insertion>
+					<angle>14.047158292344983</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1635,6 +1740,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.191477</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5123.8896' y='2719.153'/>
+				    <value>7</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='e708b36c-959e-456d-95cf-b01a278f7092' label='lat_12' po:accession='PO:0009005'>
@@ -1642,8 +1754,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.710175</length>
 					<orientation>5.1501617</orientation>
-					<insertion>2.6128259</insertion>
-					<angle>42.29004515186107</angle>
+					<insertion>2.514936</insertion>
+					<angle>28.55729412739011</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1715,6 +1827,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.9801096</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5112.153' y='2577.0303'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='038e7f1b-de6b-4766-a019-4180c7c53c93' label='lat_11' po:accession='PO:0009005'>
@@ -1722,8 +1841,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.6498356</length>
 					<orientation>3.845709</orientation>
-					<insertion>2.5192401</insertion>
-					<angle>60.354748034764235</angle>
+					<insertion>2.4783463</insertion>
+					<angle>73.44492852249873</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1764,6 +1883,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>0.91276425</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5063.315' y='2573.8352'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='936e4537-8c54-4522-9ee7-bb0d55eee2aa' label='lat_10' po:accession='PO:0009005'>
@@ -1771,8 +1897,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.50937456</length>
 					<orientation>5.516302</orientation>
-					<insertion>2.1393466</insertion>
-					<angle>4.346377217959274</angle>
+					<insertion>2.1081765</insertion>
+					<angle>10.62730989567628</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1813,6 +1939,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.0069929</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='5051.4487' y='2383.5435'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='75e2f3b3-ed54-473a-9b42-8fc977489bed' label='lat_9' po:accession='PO:0009005'>
@@ -1820,8 +1953,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.7303854</length>
 					<orientation>4.0797777</orientation>
-					<insertion>1.9251839</insertion>
-					<angle>69.34113230310163</angle>
+					<insertion>1.8904455</insertion>
+					<angle>56.00099421250135</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1865,6 +1998,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.5053355</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4968.834' y='2313.3008'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='a5a6dcc4-fafa-4a83-9071-78d34407b01d' label='lat_8' po:accession='PO:0009005'>
@@ -1872,8 +2012,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.9933956</length>
 					<orientation>2.2467418</orientation>
-					<insertion>1.8443043</insertion>
-					<angle>171.0111482121394</angle>
+					<insertion>1.7135059</insertion>
+					<angle>73.94138765251027</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -1954,6 +2094,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>2.2362864</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4977.7607' y='2212.4324'/>
+				    <value>4</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='bb7f2565-8095-4950-8870-4b1ed6d01137' label='lat_8' po:accession='PO:0009005'>
@@ -1961,8 +2108,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.4654292</length>
 					<orientation>3.9915025</orientation>
-					<insertion>1.778729</insertion>
-					<angle>58.15788599012133</angle>
+					<insertion>1.5798581</insertion>
+					<angle>51.58462121592778</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2031,6 +2178,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>8.857102</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4923.074' y='2183.2786'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='f61c5d37-8c2d-4052-8e73-38817b3174e8' label='lat_7' po:accession='PO:0009005'>
@@ -2038,8 +2192,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.3881371</length>
 					<orientation>4.0275283</orientation>
-					<insertion>1.2691365</insertion>
-					<angle>79.88279162658596</angle>
+					<insertion>1.276348</insertion>
+					<angle>66.69590932058242</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2116,8 +2270,15 @@
 				  <annotation name='Free Text'>
 				    <lPos>632.1171</lPos>
 				    <twinLPos>0.0</twinLPos>
-				    <point x='4439.035' y='2505.605'/>
+				    <point x='4440.034' y='2504.2158'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.7310786</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4852.6675' y='2044.7971'/>
+				    <value>3</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
@@ -2127,8 +2288,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.81219894</length>
 					<orientation>6.203871</orientation>
-					<insertion>1.3586074</insertion>
-					<angle>56.29821672442362</angle>
+					<insertion>1.1518344</insertion>
+					<angle>66.88744148528791</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2178,6 +2339,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>6.156972</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4898.739' y='1978.2521'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='c74247ad-9af2-4691-b0dd-2a59301bb4d1' label='lat_5' po:accession='PO:0009005'>
@@ -2185,8 +2353,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>2.2639687</length>
 					<orientation>3.547741</orientation>
-					<insertion>1.0211977</insertion>
-					<angle>97.64703448790026</angle>
+					<insertion>0.92868286</insertion>
+					<angle>89.848939210605</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2288,6 +2456,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.6924124</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4794.4155' y='1887.5247'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='d5ce8b80-6413-4854-8da8-1b7187c22ddc' label='lat_4' po:accession='PO:0009005'>
@@ -2295,8 +2470,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>0.96362156</length>
 					<orientation>3.6552565</orientation>
-					<insertion>0.7116763</insertion>
-					<angle>75.92502485164373</angle>
+					<insertion>0.68328714</insertion>
+					<angle>81.61760503425583</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2343,6 +2518,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>3.361315</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4768.8496' y='1791.948'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='a6098f8a-9156-4ef8-be48-2c489210ca01' label='lat_3' po:accession='PO:0009005'>
@@ -2350,8 +2532,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>2.1454828</length>
 					<orientation>3.628632</orientation>
-					<insertion>0.47970608</insertion>
-					<angle>81.58320820159564</angle>
+					<insertion>0.42287096</insertion>
+					<angle>77.95924643177028</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2468,6 +2650,13 @@
 				    <value>11</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>1.3182322</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4710.1973' y='1703.1383'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='5c4c2e10-b1f5-4023-87ef-4bfd719f3b14' label='lat_2' po:accession='PO:0009005'>
@@ -2475,8 +2664,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.1079588</length>
 					<orientation>4.80081</orientation>
-					<insertion>0.44693258</insertion>
-					<angle>53.74399918240565</angle>
+					<insertion>0.36074853</insertion>
+					<angle>70.11003401872665</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2515,7 +2704,7 @@
 						<sample>6.1898403</sample>
 						<sample>6.228694</sample>
 						<sample>0.030294279</sample>
-						<sample>4.873043</sample>
+						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
@@ -2526,6 +2715,13 @@
 				    <value>7</value>
 				    <software>smartroot</software>
 				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>4.0870075</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4753.258' y='1611.1959'/>
+				    <value>3</value>
+				    <software>smartroot</software>
+				  </annotation>
 				</annotations>
  </root>
 			<root ID='ee799d9a-0fe6-4498-8914-96ac4b167035' label='lat_1' po:accession='PO:0009005'>
@@ -2533,8 +2729,8 @@
   <rulerAtOrigin>0.0</rulerAtOrigin>
 					<length>1.7953002</length>
 					<orientation>3.4994755</orientation>
-					<insertion>0.0</insertion>
-					<angle>123.75442172227683</angle>
+					<insertion>0.0940714</insertion>
+					<angle>119.78750249384679</angle>
 				</properties>
 				<geometry>
 					<polyline>
@@ -2597,7 +2793,7 @@
 						<sample>6.0463367</sample>
 						<sample>6.0611033</sample>
 						<sample>6.028003</sample>
-						<sample>4.8989677</sample>
+						<sample>0.0</sample>
 					</function>
 				</functions>
 				<annotations>
@@ -2606,6 +2802,13 @@
 				    <twinLPos>0.0</twinLPos>
 				    <point x='5187.852' y='1203.7347'/>
 				    <value>11</value>
+				    <software>smartroot</software>
+				  </annotation>
+				  <annotation name='Free Text'>
+				    <lPos>5.099147</lPos>
+				    <twinLPos>0.0</twinLPos>
+				    <point x='4667.734' y='1482.8663'/>
+				    <value>3</value>
 				    <software>smartroot</software>
 				  </annotation>
 				</annotations>
