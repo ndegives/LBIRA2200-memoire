@@ -26,7 +26,7 @@ head(end.data,2)
 summary(end.data)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# 
+# Fonction qui donne moyenne et écart-type des diamètres filles pour chaque racine nodale
 mean_dataset <- function(variete) {
   end.data %>%
     filter(variety==variete, root_ontology==" Root") %>%
@@ -36,12 +36,10 @@ mean_dataset <- function(variete) {
     rename(child_mean_diameter = x.x , child_sd_diameter = x.y)-> data
   return(data)
 }
+#Amiggo <- mean_dataset("Amiggo") ; Biggben <- mean_dataset("Biggben") ; Hyperion <- mean_dataset("Hyperion") ; Juno <- mean_dataset("Juno") ; Swingg <- mean_dataset("Swingg") ; Vegga <- mean_dataset("Vegga")
 
-Amiggo <- mean_dataset("Amiggo")
-Biggben <- mean_dataset("Biggben")
-Hyperion <- mean_dataset("Hyperion")
-Juno <- mean_dataset("Juno")
-Swingg <- mean_dataset("Swingg")
-Vegga <- mean_dataset("Vegga")
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Moyenne et 
+
 # More section -----------------------------------------------------------
 
