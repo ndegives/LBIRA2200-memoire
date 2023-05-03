@@ -1,4 +1,5 @@
 library(dplyr)
+library(readxl)
 
 # Aerial part CIPF --------------------------------------------------------
 
@@ -10,26 +11,28 @@ early.global <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early gl
 early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
 
 # End stage --------------------------------------------------------------
-
-end_data <- data.frame()
-for (genotype in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
-  paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",genotype,".csv") %>%
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# end.data est le dataframe avec les données 'Global root data' de toutes les variétés + une colonne renseignant la variété 
+end.data <- data.frame()
+for (variety in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
+  paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variety,".csv") %>%
     read.csv() %>% 
-    mutate(variety = factor(genotype)) %>%
-    rbind(all_data,.) -> all_data
+    mutate(variety = factor(variety)) %>%
+    rbind(end.data,.) -> end.data
 }
-colnames(all_data)
-all_data <- select(all_data,c('root_name','diameter','root_ontology','root','parent_name','variety'))
-head(all_data,2)
-summary(all_data)
+colnames(end.data)
+end.data <- select(end.data,c('root_name','diameter','root_ontology','root','parent_name','variety'))
+head(end.data,2)
+summary(end.data)
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# 
 mean_dataset <- function(variete) {
-  stopifnot(is.character(variete))
-  all_data %>%
+  end.data %>%
     filter(variety==variete, root_ontology==" Root") %>%
     select('root_name','diameter') %>%
-    left_join(., aggregate(all_data$diameter,by=list(all_data$parent_name),FUN=mean), by = c("root_name" = "Group.1")) %>%
-    left_join(., aggregate(all_data$diameter,by=list(all_data$parent_name),FUN=sd), by = c("root_name" = "Group.1")) %>%
+    left_join(., aggregate(end.data$diameter,by=list(end.data$parent_name),FUN=mean), by = c("root_name" = "Group.1")) %>%
+    left_join(., aggregate(end.data$diameter,by=list(end.data$parent_name),FUN=sd), by = c("root_name" = "Group.1")) %>%
     rename(child_mean_diameter = x.x , child_sd_diameter = x.y)-> data
   return(data)
 }

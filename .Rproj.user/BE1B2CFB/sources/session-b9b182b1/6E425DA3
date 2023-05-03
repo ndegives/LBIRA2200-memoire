@@ -3,7 +3,7 @@
     "path": "C:/Nico/Github/Memoire/main.R",
     "project_path": "main.R",
     "type": "r_source",
-    "hash": "2772221194",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1683129677482.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "7,0",
-        "scrollLine": "0"
+        "cursorPosition": "32,38",
+        "scrollLine": "21"
     },
     "folds": "",
-    "lastKnownWriteTime": 1683130886,
+    "lastKnownWriteTime": 1683143835,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1683130887006,
+    "last_content_update": 1683143835275,
     "read_only": false,
     "read_only_alternatives": []
 }
