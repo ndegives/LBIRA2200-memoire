@@ -1,0 +1,7 @@
+library(openxlsx)
+df <- data.frame(
+  rep(c("A1", "A2","A3","B1","B2","B3","H1","H2","H3","J1","J2","J3","S1","S2","S3","V1","V2","V3"), each = 5),
+  rep(seq(1,5),6)
+)
+
+write.xlsx(df, "node.xlsx")

@@ -1,0 +1,193 @@
+---
+title: "Titre"
+author: "Degives Nicolas"
+date: "Date"
+output:
+  html_document:
+    code_folding: show
+    collapsed: yes
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 6
+    highlight: tango
+    number_sections: yes
+    smart: no
+    theme: united
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '2'
+    number_sections: yes
+editor_options:
+  chunk_output_type: console
+---
+  
+```{r setup, include=FALSE}
+rm(list=ls()) # Clean the workspace
+library(pander)
+library(readxl)
+library(tidyverse)
+library(knitr)
+library(htmltools)
+library(lme4)
+library(lmerTest)
+```
+
+# Load and prepare the Data
+
+## Import 
+
+```{r, echo=TRUE}
+data<- read_excel("Aerials data/Sorgho20_21_22_CIPF.xlsx")
+head(data)
+```
+
+## Sort the columns
+
+```{r, echo=TRUE}
+cols_to_remove <- c('date_semis','date_recolte','lieu','precedent','traitement_semences','densite_semis','type_sorgho')
+data <- data[, ! names(data) %in% cols_to_remove, drop = F]
+data$variete <- as.factor(data$variete)
+data$annee <- as.factor(data$annee)
+pander(summary(data))
+```
+
+# Condition météo
+
+```{r, echo=TRUE}
+meteo <- read_excel("Aerials data/Sorgho20_21_22_CIPF.xlsx",sheet = "pluvio_temp")
+
+mean_culture_rain <- c(
+  mean((subset(meteo,annee==2020)$mean_rain)),
+  mean((subset(meteo,annee==2021)$mean_rain)),
+  mean((subset(meteo,annee==2022)$mean_rain))
+)
+mean_culture_rain <- data.frame(Year=c(2020,2021,2022),mean_culture_rain)
+
+#Plot precipitation
+ggplot(data=meteo,aes(x=Mois))+
+  facet_wrap(~annee)+
+  geom_col(aes(y=mean_rain),width=0.5,fill='blue')+
+  labs(title = "Pluviometrie")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+#Plot temperature
+ggplot(data = meteo, aes(x=Mois))+
+  facet_wrap(~annee)+
+  geom_col(aes(y=mean_temp),width=0.5,fill='red')+
+  labs(title='Temperature')
+
+#Diagramme ombrothermique
+Mois = c('06/20','07/20','08/20','09/20','10/20',
+         '06/21','07/21','08/21','09/21','10/21',
+         '05/22','06/22','07/22','08/22','09/22')
+plot.new()
+par(mar=c(4,4,3,4))
+position=barplot(meteo$mean_rain,col='blue',names.arg = Mois,axes=F,ylab="",xlab="",main="Precipitation et température",ylim=c(0,200))
+axis(2,col="black",at=seq(0, 200, by=50))
+par(new=TRUE,mar=c(4,4,3,4))
+maximal = max(position)+(position[2]-position[1])
+plot(position,meteo$mean_temp,col="red",type="o",lwd=2,pch=16,axes=F,ylab="",xlab="",ylim=c(0,25))
+axis(4,col.axis='red',col='red')
+box();grid()
+
+```
+
+# Rendement et pourcentage MS
+
+```{r, echo=TRUE}
+# Plot général
+ggplot(data=subset(data,annee==2021),aes(x=`%MS`,y=rendement_MS, color=variete)) + geom_point(alpha = 1, size=3) + 
+               labs(color = "Variety", 
+                    x= "% Dry matter",
+                    y= "Dry matter yield [t/ha]",
+                    title="Yield")
+```
+
+# Observation des rendements en fonction de l'année et de la variétée
+
+```{r, echo=TRUE}
+# Plot général
+ggplot(data,aes(x=annee,y=rendement_MS, color=variete)) + geom_point(alpha = 0.8, size=3) + 
+               labs(color = "Variety", 
+                    x= "Year",
+                    y= "Dry matter yield [t/ha]",
+                    title="Yield by year and variety")
+# Barplot séparé par année
+ggplot(data=data,aes(x=variete,y=rendement_MS))+
+  geom_bar(stat = 'identity',aes(fill=variete))+
+  facet_wrap(~annee)+
+  theme(axis.text.x=element_blank())+
+  labs(x='',
+       y='rendement [T/ha]',
+       title='Barplot séparé par année')
+
+# Barplot séparé par variété
+ggplot(data=data,aes(x=as.factor(annee),y=rendement_MS))+
+  geom_bar(stat='identity')+ 
+  facet_wrap(~variete)+
+  labs(x='annee',
+       y='rendement',
+       title = 'Barplot séparé par variété')
+```
+
+# Variabilité des rendements annuel
+
+```{r, echo=TRUE}
+# Box plot
+ggplot(data=data,aes(x=annee,y=rendement_MS))+
+  geom_boxplot()+
+  labs(x='Année',
+       y='rendement [T/ha]')
+
+# Test
+mod <- lm(data=data, rendement_MS~annee)
+summary(mod)
+anova(mod)
+```
+
+On observe que l'année n'est pas un facteur significatifs donc peut d'impact météo sur les rendements moyens de sorgho.
+
+# Variabilité des rendements entre variétée
+
+```{r, echo=TRUE}
+# Box plot
+ggplot(data=data,aes(x=variete,y=rendement_MS))+
+  geom_boxplot()+
+  labs(x='Variété',
+       y='rendement [T/ha]')
+
+# Test
+mod <- lm(data=data, rendement_MS~variete)
+summary(mod)
+anova(mod)
+```
+
+On observe que la variété est un facteur significatifs.
+
+# Variabilité des rendements avec annee et variete en facteur fixe
+
+```{r, echo=TRUE}
+# Test
+mod <- lm(data=data, rendement_MS~annee+variete)
+summary(mod)
+anova(mod)
+```
+
+
+# Variabilité des rendements avec variete en facteur fixe et annee en facteur aléatoire
+
+```{r, echo=TRUE}
+mod <- lmer(data=data,formula = rendement_MS~variete+(1|annee))
+summary(mod)
+anova(mod)
+ranova(mod)
+```
+
+
+
+```{r, echo=TRUE}
+
+```

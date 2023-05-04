@@ -1,0 +1,188 @@
+---
+title: "TP1 : Modèle linéaire général (Rappel)" 
+author: "LBIR2222"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+output:
+  html_document: # options pour la mise en page des sortie HTML
+    smart: FALSE
+    code_folding: hide #  Cache le code  
+    collapsed: yes # Crée un document unique 
+    fig_caption: yes # Figures encapsulées ? 
+    fig_height: 5 # Hauteur par défaut des figures
+    fig_width: 8 # Largeur par défaut des figures
+    highlight: tango # Style de mise en valeur du code
+    number_sections: yes # Ajout table des matières 
+    theme: united  # Style du document
+    toc: yes # Table des matiere ?
+    toc_depth: 3  # Profondeur table des matières
+    toc_float: yes # Table des matières flottante
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+# Pour éviter que Rmd mette par défaut deux # au début de chaque ligne de code:
+knitr::opts_chunk$set(comment="") 
+
+# Liste des packages à charger
+require(pander) # Afficher de jolis tableaux
+panderOptions('missing', '') # Là où les données contiennent des Na, ne rien afficher
+require(ggplot2)
+theme_set(theme_classic()) # Afficher les graphes ggplot avec un fond blanc
+require(emmeans)
+```
+
+# Contexte et plan d'expérience
+Lors d'une expérience en serre, une chercheuse souhaite estimer l'impact de différents régimes d'irrigation sur la croissance de plants de maïs de variétés différentes. Sa serre étant bordée d'arbres au sud-ouest, les plants sont soumis à des expositions différentes susceptibles d'impacter leur croissance. Elle décide donc de prendre en compte l'intensité lumineuse à laquelle sont soumis ses plants. 
+Elle fait donc l'expérience suivante :
+![](Plan_TP1.PNG)
+
+Elle rassemble ensuite ces données dans un fichier CSV (Comma Separated Values) et nous demande de les analyser. Nous avons donc 72 lignes pour les variables suivantes:  
+
+**M**: Biomasse accumulée sur une semaine ( FW [g/plant])  
+**PPFD**: PPFD cumulé sur une semaine (mol/m²)  
+**W**: régime d'irrigation (WW=Well Watered, WLD=Water light deficit, WD=Water deficit)  
+**V**: Variété (A, B ou C)  
+
+Note 1 : Le PPFD (Photosynthetic Photon Flux Density) est le nombre de photons dans la gamme de fréquence de 400 à 700 nm par unité de temps sur une unité de surface.  
+
+Note 2 : Il s'agit d'un plan factoriel complet avec huits répétitions : $3(lvl_W)*3(lvl_V)*8(répétitions)=72$
+
+# Importation et exploration des données
+
+```{r}
+mydata <- read.csv("plant_growth_data.csv")
+```
+
+Avant toute chose, il s’agit d’explorer et de visualiser vos données afin d’avoir un premier apperçu des variables et éventuels problèmes que vous pourriez rencontrer. 
+
+- Déterminez combien de plantes sont testées pour chaque niveau des deux facteurs catégoriels
+
+Commencez par un rapide résumé (à l'aide de `str()`, `summary()` ou `table()` par exemple):
+
+```{r}
+pander(summary(mydata))
+head(table(mydata[, c("W","V", "PPFD")]))
+
+```
+
+A l'aide de ce résumé nous pouvons conclure que 24 plantes sont testées pour chacun des niveaux des facteurs W et V.
+
+- Représentez vos données en représentant les différents niveaux des facteurs à l'aide de couleurs ou de formes (avec un `ggplot()`)
+
+```{r}
+ggplot(mydata,aes(x=PPFD,y=M,color=W, shape=V)) +
+  geom_point(alpha = 0.5, size=3) + 
+  labs(shape="Maize varieties",
+       color = "Watering", 
+       x= "Cumulated PPFD [mol/m²]",
+       y= "Biomass (FW) [g/plant]")
+```
+
+# Modélisation
+Comme vous suspectez des interactions entre les effets des trois variables explicatives, vous aimeriez estimer un modèle linéaire général complet. 
+
+## Premier modèle
+Testez un premier modèle contenant les trois variables et toutes leurs interactions. Sur base des résultats de l'analyse ANOVA, quels sont les facteurs qui sont significatifs ?
+```{r}
+mod <- lm(M ~ PPFD * W * V, mydata)
+anova(mod)
+```
+On observe que la variété (V) n'est pas un facteur significatif pour expliquer la croissance des plantes. 
+
+## Deuxième modèle
+Sur base des résultats de l'ANOVA sur le premier modèle, ajustez votre modèle et refaites une nouvelle ANOVA. Que pouvez-vous en conclure ? Nous allons réaliser un nouveau modèle sans le facteur variété : 
+```{r}
+mod <- lm(M ~ PPFD * W , mydata)
+summary(mod)
+anova(mod)
+```
+
+Nous constatons que l'adaptation faite dans le modèle 2 semble plus intéressante puisque tous les effets sont significatifs. Cependant, nous pouvont observer que la $Sum Sq$ des résidus a augmenté. Effectivement, lorsque nous avons enlevé le facteur variété, une part de la variabilité expliquée par ce facteur (même si non significative) se retrouve maintenant dans la variabilité résiduelle.
+
+Avant d'aller plus loin, vérifiez bien que vous comprenez chacune des valeurs données dans ce tableau ainsi que les tests effectués. 
+
+## Vérification des hypothèses sous-jacentes au modèle
+Avant de se lancer dans l'interprétation de votre modèle, vérifiez bien les hypothèses sous-jacentes à la régression (Normalité, indépendance des données, constance de la variance). Ces hypothèses sont-elles respectées ?
+
+```{r fig.height=7}
+par(mfrow = c(2,2))
+plot(mod)
+par(mfrow=c(1,1))
+```
+
+Ici, R vous indique plusieurs points suspects. La valeur standardisée de ces résidus s'éloigne de 0 de plus de 2 et ils semblent s'éloigner de la distribution normale sur le qqplot. 
+Avant de les retirer, il serait intéressant de contacter l'équipe de recherche afin de savoir si des erreurs de mesures auraient pu se produire avec ces individus.  
+Par contre, la variance des résidus semble constante.
+
+## Visualisation du modèle avec intervalles de confiance
+Lorsque vous visualisez votre modèle, soyez attentifs aux labels des axes et au titre de la légende. Les intervales affichés sont les intervales de confiance pour la réponse moyenne (IC au modèle). Quelle information déjà observée dans l'ANOVA vous montrent les pentes des droites ? 
+```{r}
+ggplot(mydata, aes(x=PPFD,y=M,color=W, fill=W)) + geom_point(size=1) +  geom_smooth(method = 'lm') +
+               labs(x= "Cumulated PPFD [mol/m²]", y= "Biomass (FW) [g/plant]")+
+               guides(fill=guide_legend("Watering"), color=guide_legend("Watering"))
+```
+
+Des droites de pentes différentes indiquent une interaction entre l'effet du PPFD et du régime d'irrigation.
+
+# Prédictions
+Notre chercheuse aimerait prédire la croissance de ses plants de maïs lorsque le PPFD est de 150 ou 200, avec un régime d'irrigation WW ou WD (bien irrigué ou déficit en eau). Utilisez votre modèle pour effectuer cette prédiction pour toutes les combinaisons possibles de ces valeurs. Calculez aussi l'intervalle de confiance pour la réponse moyenne et l'intervale de prédiction pour chacune de ces situations. 
+
+## Intervale de confiance pour la réponse moyenne (IC au modèle)
+```{r}
+xpred <- data.frame("W" = c("WW","WD","WW","WD"),
+                  "PPFD" = c(150, 150, 200, 200))
+modIC <- predict(mod, newdata = xpred, interval = "confidence")
+
+res <- data.frame(xpred, modIC)
+pander(res)
+```
+
+## Intervale de prédiction (IC aux valeurs)
+```{r}
+predIC <- predict(mod, newdata = xpred, interval = "prediction")
+
+res <- data.frame(xpred, predIC)
+pander(res)
+```
+
+# Matrice X
+On peut afficher la matrice **X** utilisée par R pour estimer le modèle à l'aide de `model.matrix()`. Quelle différence avec la matrice de votre modèle de régression telle que vue au cours? Pourquoi ?
+
+```{r}
+pander(model.matrix(mod))
+```
+
+R a enlevé un niveau de chaque facteur afin d'avoir une matrice inversible. 
+
+# Pour rappel, vous vous intéressez à connaître l'effet du niveau d'irrigation sur la biomasse des plants de maïs. Sur base des résultats que vous avez, que pouvez-vous dire ? N'hésitez pas à utiliser les fonctions `emmeans()` et `ref_grid()` pour illustrer vos explications ? 
+
+Lorsque l'on fait un `emmeans()`, nous observons qu'il y a des différences significatives entre les biomasses en fonction de si W= WD, WLD, WW. De manière générale, une plante qui reçoit plus d'eau aura une biomasse plus élevée.  
+
+Cependant, comme l'indique la console de R, ces comparaisons sont effectuées pour un PPFD moyen de 172 mol/m². Hors, nous savons que nos données ne se comportent pas de la même manière si la valeur de PPFD est faible ou élevée (cfr. intéraction W*PPFD). Ce test est donc à prendre avec des pincettes !
+
+```{r}
+emm_s.t <- emmeans(mod, pairwise ~ W | PPFD)
+emm_s.t
+```
+
+Nous pouvons calculer les valeurs estimées pour chaque valeur de PPFD : 
+
+```{r}
+mod.rg1 <- pairs(ref_grid(mod, at = list(PPFD = c(136))))
+summary(mod.rg1)
+
+mod.rg2 <- pairs(ref_grid(mod, at = list(PPFD = c(147))))
+summary(mod.rg2)
+
+mod.rg3 <- pairs(ref_grid(mod, at = list(PPFD = c(192))))
+summary(mod.rg3)
+
+mod.rg4 <- pairs(ref_grid(mod, at = list(PPFD = c(211))))
+summary(mod.rg4)
+
+```
+
+Avec les résultats observés ci-dessous, nous pouvons conclure que lorsque les valeurs de PPFD sont faibles, les différences de biomasses sont moins marquées que lorsque les valeurs de PPFD sont élevées. Nous remarquons d'ailleurs qu'à des PPFD de 136 mol/m², la différence entre les biomasses des maïs WD et WLD n'est pas significative.  
+
+Cela veut dire qu'en fonction de l'expérience et de la question de recherche il peut être plus intéressant de travailler à un PPFD faible (moins de différences dues au niveau d'irrigation) ou à un PPFD élevé (on observe plus de différences dues au niveau d'irrigation).
