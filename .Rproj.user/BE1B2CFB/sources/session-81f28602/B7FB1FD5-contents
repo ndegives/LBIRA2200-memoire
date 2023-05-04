@@ -84,6 +84,13 @@ pander(left_join(
 ))
 ```
 
+## Rapport diamètre fille/mère
+
+```{r, echo=TRUE}
+
+```
+
+
 ```{r, echo=TRUE}
 # Fonction qui donne moyenne et écart-type des diamètres filles pour chaque racine nodale
 mean_dataset <- function(variete) {
