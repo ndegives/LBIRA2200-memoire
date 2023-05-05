@@ -32,6 +32,7 @@ library(readxl)
 library(ggplot2)
 library(stringr)
 library(pander)
+library(car)
 ```
 
 # Aerial part CIPF
@@ -56,7 +57,7 @@ for (variety in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
   paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variety,".csv") %>%
     read.csv() %>% 
     mutate(variety = factor(variety)) %>%
-    select('root_name','diameter','root_ontology','root','parent_name','variety') %>%
+    select('root_name','root','diameter','root_ontology','parent_name','variety') %>%
     rbind(end.data,.) -> end.data
 }
 summary(end.data)
@@ -84,58 +85,70 @@ pander(left_join(
 ))
 ```
 
-## Rapport diamètre fille/mère
+## Diamètre
+
+### Boxplot
+
+**Nodal root**
 
 ```{r, echo=TRUE}
-
+# Boxplot nodal 
+subset(end.data, root_ontology==" Root") %>%
+  ggplot(aes(x=variety,y=diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='nodal root')+
+  theme_classic()
 ```
 
+**Lateral root**
 
 ```{r, echo=TRUE}
-# Fonction qui donne moyenne et écart-type des diamètres filles pour chaque racine nodale
-mean_dataset <- function(variete) {
-  end.data %>%
-    filter(variety==variete, root_ontology==" Root") %>%
-    select('root_name','diameter') %>%
-    left_join(., aggregate(end.data$diameter,by=list(end.data$parent_name),FUN=mean), by = c("root_name" = "Group.1")) %>%
-    left_join(., aggregate(end.data$diameter,by=list(end.data$parent_name),FUN=sd), by = c("root_name" = "Group.1")) %>%
-    rename(child_mean_diameter = x.x , child_sd_diameter = x.y)-> data
-  return(data)
-}
-#Amiggo <- mean_dataset("Amiggo") ; Biggben <- mean_dataset("Biggben") ; Hyperion <- mean_dataset("Hyperion") ; Juno <- mean_dataset("Juno") ; Swingg <- mean_dataset("Swingg") ; Vegga <- mean_dataset("Vegga")
+# Boxplot lateral
+subset(end.data, root_ontology==" Lateral root") %>%
+  ggplot(aes(x=variety,y=diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='lateral root')+
+  theme_gray()
 ```
 
+**Ratio mere-fille**
+
 ```{r, echo=TRUE}
-#Density histogram
-end.data %>%
-  subset(.,root_ontology==' Root'& variety=="Amiggo") %>%
-  filter(str_detect(root_name, "_4_")) %>%
-  ggplot(.,aes(x=diameter))+
-  geom_histogram(aes(y=..density..))+
-  geom_density(col = "lightsteelblue3", 
-               aes(fill = "Fitted pdf"), 
-               alpha = 0.2)
-  
-  
-ggplot(., aes(x = diameter)) +
-geom_histogram(aes(y = ..density.., 
-                     fill = "Density histogram" ),
-                 bins = 15, 
-                 color = "red") + 
-  geom_density(col = "lightsteelblue3", 
-               aes(fill = "Fitted pdf"), 
-               alpha = 0.2) +  
-  xlab("D") + 
-  ylab("f(x)") + 
-  ggtitle("Density histogram of the diameter") +
-  stat_function(fun=dnorm, 
-                args=list(mean = mean(.$diameter), sd = sd(.$diameter)),
-                aes(color="Normal pdf"),
-                size= 1) +
-  scale_fill_manual("", values = c("Density histogram"="lightsteelblue2",
-                                   "Fitted pdf"=alpha("lightsteelblue3",.2))) +
-  scale_color_manual("", values="red")
+end.data <- end.data %>%
+  mutate(parent_diameter = ifelse(parent_name != '-1', 
+                                  diameter[match(parent_name, root_name)], 
+                                  NA))
 ```
+
+### Anova 
+
+**Nodal root**
+
+```{r, echo=TRUE}
+subset(end.data, root_ontology==" Root") %>%
+  lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
+
+**Lateral root**
+
+```{r, echo=TRUE}
+subset(end.data, root_ontology==" Lateral root") %>%
+  lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
+
+### Rapport diamètre fille/mère
 
 ```{r, echo=TRUE}
 
