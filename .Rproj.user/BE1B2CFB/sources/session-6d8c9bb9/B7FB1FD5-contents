@@ -87,10 +87,9 @@ pander(left_join(
 
 ## Diamètre
 
-### Boxplot
+### Racine nodales
 
-**Nodal root**
-
+**Boxplot **
 ```{r, echo=TRUE}
 # Boxplot nodal 
 subset(end.data, root_ontology==" Root") %>%
@@ -101,19 +100,20 @@ subset(end.data, root_ontology==" Root") %>%
   theme_classic()
 ```
 
-**Lateral root**
+**Anova **
 
 ```{r, echo=TRUE}
-# Boxplot lateral
-subset(end.data, root_ontology==" Lateral root") %>%
-  ggplot(aes(x=variety,y=diameter))+
-  geom_boxplot()+
-  stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='lateral root')+
-  theme_gray()
+subset(end.data, root_ontology==" Root") %>%
+  lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
 ```
+### Rapport diamètre fille/mère
 
-**Ratio mere-fille**
+**Boxplot**
 
 Ajoute une colonne diametre parent et une colonne ratio $$\frac{diametre_{racine}}{diametre_{parent}}$$
 
@@ -130,33 +130,7 @@ end.data %>%
   theme_gray()
 ```
 
-### Anova 
-
-**Nodal root**
-
-```{r, echo=TRUE}
-subset(end.data, root_ontology==" Root") %>%
-  lm(diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-**Lateral root**
-
-```{r, echo=TRUE}
-subset(end.data, root_ontology==" Lateral root") %>%
-  lm(diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-**Ratio diameter**
+**Anova**
 
 ```{r, echo=TRUE}
 end.data %>%
@@ -168,7 +142,31 @@ plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
 
-### Rapport diamètre fille/mère
+### Lateral
+
+**Boxplot**
+
+```{r, echo=TRUE}
+# Boxplot lateral
+subset(end.data, root_ontology==" Lateral root") %>%
+  ggplot(aes(x=variety,y=diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='lateral root')+
+  theme_gray()
+```
+
+**Anova**
+
+```{r, echo=TRUE}
+subset(end.data, root_ontology==" Lateral root") %>%
+  lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
 
 ```{r, echo=TRUE}
 
