@@ -111,6 +111,7 @@ par(mfrow = c(2,2))
 plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
+
 ### Rapport diamètre fille/mère
 
 **Boxplot**
