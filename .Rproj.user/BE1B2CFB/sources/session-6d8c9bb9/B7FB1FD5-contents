@@ -115,11 +115,19 @@ subset(end.data, root_ontology==" Lateral root") %>%
 
 **Ratio mere-fille**
 
+Ajoute une colonne diametre parent et une colonne ratio $$\frac{diametre_{racine}}{diametre_{parent}}$$
+
 ```{r, echo=TRUE}
 end.data <- end.data %>%
-  mutate(parent_diameter = ifelse(parent_name != '-1', 
-                                  diameter[match(parent_name, root_name)], 
-                                  NA))
+  mutate(parent_diameter = ifelse(parent_name != '-1', diameter[match(parent_name, root_name)],NA)) %>%
+  mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA))
+
+end.data %>%
+  ggplot(aes(x=variety,y=ratio_diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='ratio root/parent_root')+
+  theme_gray()
 ```
 
 ### Anova 
@@ -141,6 +149,18 @@ pander(leveneTest(mod, center = "median"))
 ```{r, echo=TRUE}
 subset(end.data, root_ontology==" Lateral root") %>%
   lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
+
+**Ratio diameter**
+
+```{r, echo=TRUE}
+end.data %>%
+  lm(ratio_diameter ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
 par(mfrow = c(2,2))
