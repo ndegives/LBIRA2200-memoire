@@ -1,7 +1,7 @@
 ---
-title: "Titre"
+title: "Mémoire"
 author: "Degives Nicolas"
-date: "Date"
+date: "2023"
 output:
   html_document:
     code_folding: show
@@ -46,7 +46,87 @@ aerial <- read_excel("Aerials data/Sorgho20_21_22_CIPF.xlsx")
 
 ```{r, echo=TRUE}
 early.global <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early global.csv")
+early.data <- data.frame()
+for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
+  early.global %>%
+    subset(grepl(substr(variete, start = 1, stop = 1),.$image)) %>%
+    mutate(variety=factor(variete)) %>%
+    select('root_name','root','diameter','root_ontology','parent','parent_name','variety') %>%
+    mutate(parent_diameter = ifelse(parent != '-1', diameter[match(parent, root)],NA)) %>%
+    mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
+    rbind(early.data,.) -> early.data
+}
+```
+
+```{r, echo=TRUE}
 early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
+```
+
+## Diamètre
+
+### Racine primaire
+
+**Boxplot **
+
+```{r, echo=TRUE}
+# Boxplot nodal 
+subset(early.data, root_ontology==" Root") %>%
+  ggplot(aes(x=variety,y=diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='Primary root')+
+  theme_classic()
+```
+
+**Anova **
+
+```{r, echo=TRUE}
+subset(early.data, root_ontology==" Root") %>%
+  lm(diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
+
+```{r, echo=TRUE}
+
+```
+
+### Rapport diamètre fille/mère
+
+**Boxplot**
+
+Ajoute une colonne diametre parent et une colonne ratio $$\frac{diametre_{racine}}{diametre_{parent}}$$
+
+```{r, echo=TRUE}
+early.data %>%
+  ggplot(aes(x=variety,y=ratio_diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='ratio root/parent_root')+
+  theme_gray()
+```
+
+**Anova**
+
+```{r, echo=TRUE}
+early.data %>%
+  lm(ratio_diameter ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
+```
+
+```{r, echo=TRUE}
+
+```
+
+```{r, echo=TRUE}
+
 ```
 
 # End stage 
@@ -57,7 +137,9 @@ for (variety in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
   paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variety,".csv") %>%
     read.csv() %>% 
     mutate(variety = factor(variety)) %>%
-    select('root_name','root','diameter','root_ontology','parent_name','variety') %>%
+    select('root_name','root','diameter','root_ontology','parent','parent_name','variety') %>%
+    mutate(parent_diameter = ifelse(parent != '-1', diameter[match(parent, root)],NA)) %>%
+    mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
     rbind(end.data,.) -> end.data
 }
 summary(end.data)
@@ -90,6 +172,7 @@ pander(left_join(
 ### Racine nodales
 
 **Boxplot **
+
 ```{r, echo=TRUE}
 # Boxplot nodal 
 subset(end.data, root_ontology==" Root") %>%
