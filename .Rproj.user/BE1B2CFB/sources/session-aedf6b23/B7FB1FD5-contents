@@ -56,10 +56,54 @@ for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
     mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
     rbind(early.data,.) -> early.data
 }
+rm(early.global)
 ```
 
 ```{r, echo=TRUE}
 early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
+early.growth %>%
+  subset(root_name==' root_0') %>%
+  group_by(root) %>%
+  na.omit() %>%
+  filter(date == max(date)) %>%
+  mutate(variety = case_when(
+    grepl("A", image) ~ "Amiggo",
+    grepl("B", image) ~ "Biggben",
+    grepl("H", image) ~ "Hyperion",
+    grepl("J", image) ~ "Juno",
+    grepl("S", image) ~ "Swingg",
+    grepl("V", image) ~ "Vegga",
+    TRUE ~ NA_character_ )) %>%
+  mutate(variety=as.factor(variety)) %>%
+  mutate(growth = position/date) %>%
+  select('variety','root','position','date','growth') -> early.growth
+```
+
+## Croissance
+
+**Boxplot **
+
+```{r, echo=TRUE}
+early.growth %>%
+  ggplot(aes(x=variety,y=growth))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(x='variete',
+       y='growth [cm/day]',
+       title='Primary root grotwh ')+
+  theme_classic()
+```
+
+**Anova **
+
+```{r, echo=TRUE}
+early.growth %>%
+  lm(growth ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+pander(leveneTest(mod, center = "median"))
 ```
 
 ## Diamètre
@@ -90,10 +134,6 @@ plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
 
-```{r, echo=TRUE}
-
-```
-
 ### Rapport diamètre fille/mère
 
 **Boxplot**
@@ -119,14 +159,6 @@ pander(anova(mod))
 par(mfrow = c(2,2))
 plot(mod)
 pander(leveneTest(mod, center = "median"))
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
 ```
 
 # End stage 
