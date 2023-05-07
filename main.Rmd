@@ -66,17 +66,9 @@ early.growth %>%
   group_by(root) %>%
   na.omit() %>%
   filter(date == max(date)) %>%
-  mutate(variety = case_when(
-    grepl("A", image) ~ "Amiggo",
-    grepl("B", image) ~ "Biggben",
-    grepl("H", image) ~ "Hyperion",
-    grepl("J", image) ~ "Juno",
-    grepl("S", image) ~ "Swingg",
-    grepl("V", image) ~ "Vegga",
-    TRUE ~ NA_character_ )) %>%
-  mutate(variety=as.factor(variety)) %>%
   mutate(growth = position/date) %>%
-  select('variety','root','position','date','growth') -> early.growth
+  left_join(., early.data, by = "root") %>%
+  select('variety','root','position','date','growth','diameter') -> early.growth
 ```
 
 ## Croissance
@@ -134,7 +126,7 @@ plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
 
-### Rapport diamètre fille/mère
+### Rapport diamètre fille/primaire
 
 **Boxplot**
 
