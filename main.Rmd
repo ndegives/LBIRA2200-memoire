@@ -35,6 +35,22 @@ library(pander)
 library(car)
 ```
 
+
+```{r, echo=TRUE}
+diameter_outliers <- function(data) {
+  Q1 <- quantile(data$diameter, 0.25)
+  Q3 <- quantile(data$diameter, 0.75)
+  IQR <- Q3 - Q1
+  lower <- Q1 - 1.5*IQR
+  upper <- Q3 + 1.5*IQR
+  data_clean <- data %>% filter(diameter >= lower & diameter <= upper)
+  return(data_clean)
+}
+```
+
+L'intervalle interquartile (IQR) est constitué des 50 % centraux des données et contient la majorité de vos points de données. Dans un diagramme en boîte, l'IQR est la partie de la boîte située entre le premier et le troisième quartile. L'IQR peut être utilisé pour calculer les limites inférieures et supérieures des données, ce qui permet d'identifier les valeurs aberrantes.
+Les valeurs au dela de Q1-1.5 IQR  ou de Q3+1.5 IQR sont enlevée.
+
 # Aerial part CIPF
 
 ```{r, echo=TRUE}
@@ -76,7 +92,7 @@ early.growth %>%
 **Boxplot **
 
 ```{r, echo=TRUE}
-early.growth %>%
+early.growth %>% 
   ggplot(aes(x=variety,y=growth))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -106,7 +122,7 @@ pander(leveneTest(mod, center = "median"))
 
 ```{r, echo=TRUE}
 # Boxplot nodal 
-subset(early.data, root_ontology==" Root") %>%
+subset(early.data, root_name==" root_0") %>%
   ggplot(aes(x=variety,y=diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -117,7 +133,7 @@ subset(early.data, root_ontology==" Root") %>%
 **Anova **
 
 ```{r, echo=TRUE}
-subset(early.data, root_ontology==" Root") %>%
+subset(early.data, root_name==" root_0") %>%
   lm(diameter ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
@@ -130,7 +146,6 @@ pander(leveneTest(mod, center = "median"))
 
 **Boxplot**
 
-Ajoute une colonne diametre parent et une colonne ratio $$\frac{diametre_{racine}}{diametre_{parent}}$$
 
 ```{r, echo=TRUE}
 early.data %>%
@@ -152,6 +167,15 @@ par(mfrow = c(2,2))
 plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
+
+## Croissance vs diamètre
+
+```{r, echo=TRUE}
+mod <- lm(growth~diameter*variety, data=early.growth)
+summary(mod)
+plot(mod)
+```
+
 
 # End stage 
 
@@ -200,6 +224,7 @@ pander(left_join(
 ```{r, echo=TRUE}
 # Boxplot nodal 
 subset(end.data, root_ontology==" Root") %>%
+  diameter_outliers(.) %>%
   ggplot(aes(x=variety,y=diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -211,6 +236,7 @@ subset(end.data, root_ontology==" Root") %>%
 
 ```{r, echo=TRUE}
 subset(end.data, root_ontology==" Root") %>%
+  diameter_outliers(.) %>%
   lm(diameter ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
@@ -223,14 +249,9 @@ pander(leveneTest(mod, center = "median"))
 
 **Boxplot**
 
-Ajoute une colonne diametre parent et une colonne ratio $$\frac{diametre_{racine}}{diametre_{parent}}$$
-
 ```{r, echo=TRUE}
-end.data <- end.data %>%
-  mutate(parent_diameter = ifelse(parent_name != '-1', diameter[match(parent_name, root_name)],NA)) %>%
-  mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA))
-
-end.data %>%
+subset(end.data,root_ontology==' Lateral root') %>%
+  diameter_outliers(.) %>%
   ggplot(aes(x=variety,y=ratio_diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -241,7 +262,8 @@ end.data %>%
 **Anova**
 
 ```{r, echo=TRUE}
-end.data %>%
+subset(end.data,root_ontology==' Lateral root') %>%
+  diameter_outliers(.) %>%
   lm(ratio_diameter ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
@@ -257,6 +279,7 @@ pander(leveneTest(mod, center = "median"))
 ```{r, echo=TRUE}
 # Boxplot lateral
 subset(end.data, root_ontology==" Lateral root") %>%
+  diameter_outliers(.) %>%
   ggplot(aes(x=variety,y=diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -268,6 +291,7 @@ subset(end.data, root_ontology==" Lateral root") %>%
 
 ```{r, echo=TRUE}
 subset(end.data, root_ontology==" Lateral root") %>%
+  diameter_outliers(.) %>%
   lm(diameter ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
