@@ -33,10 +33,8 @@ library(ggplot2)
 library(stringr)
 library(pander)
 library(car)
-library(archiDART)
 ```
 
-# Fonction utiles
 
 ```{r, echo=TRUE}
 diameter_outliers <- function(data) {
@@ -53,56 +51,32 @@ diameter_outliers <- function(data) {
 L'intervalle interquartile (IQR) est constitué des 50 % centraux des données et contient la majorité de vos points de données. Dans un diagramme en boîte, l'IQR est la partie de la boîte située entre le premier et le troisième quartile. L'IQR peut être utilisé pour calculer les limites inférieures et supérieures des données, ce qui permet d'identifier les valeurs aberrantes.
 Les valeurs au dela de Q1-1.5 IQR  ou de Q3+1.5 IQR sont enlevée.
 
-# Importation données
-
-aerial reprend les données de l'excel qui synthétise les résultats de parties aériennes du CIPF.  
-early.global provient du batch 'global root data' exporté de smartroot sur les échantillons de début de culture en rhizotron.  
-early.growth provient du batch 'growth rate' exporté de smartroot sur les échantillons de début de culture en rhizotron.  
-node reprend le nimbre de racine nodale par noeuds des échantillons en fin de culture.  
-end.global provient du batch 'global root data' exporté de smartroot sur les échantillons de fin de culture du CIPF.  
-**!!! Toutes les mesures extraites de SmartRoot sont en cm !!!**
+# Aerial part CIPF
 
 ```{r, echo=TRUE}
 # Load your data here
 aerial <- read_excel("Aerials data/Sorgho20_21_22_CIPF.xlsx")
-early.global <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early global.csv")
-early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
-node <- read_excel("End_growth_root_data/root_data/0.global_root_data/node.xlsx")
-end.global <- data.frame()
-for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
-  paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variete,".csv") %>%
-    read.csv() %>%
-    mutate(variety = factor(variete)) %>%
-    rbind(end.global,.) -> end.global
-  }
 ```
 
-# Préparation et tri des dataframe
-
-## Early data
-
-Dataframe avec diamètres de toutes les racines + ratio diamètre $$\frac{latérale}{primaire}$$.  
+# Early stage
 
 ```{r, echo=TRUE}
+early.global <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early global.csv")
 early.data <- data.frame()
 for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
   early.global %>%
     subset(grepl(substr(variete, start = 1, stop = 1),.$image)) %>%
     mutate(variety=factor(variete)) %>%
-    select('root_name','root','diameter','root_ontology','parent','parent_name','variety','child_density') %>%
-    mutate(diameter)
+    select('root_name','root','diameter','root_ontology','parent','parent_name','variety') %>%
     mutate(parent_diameter = ifelse(parent != '-1', diameter[match(parent, root)],NA)) %>%
     mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
     rbind(early.data,.) -> early.data
 }
-
+rm(early.global)
 ```
 
-## Primary data
-
-Dataframe avec les données de croissance et de diamètre des racines primaires 
-
 ```{r, echo=TRUE}
+early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
 early.growth %>%
   subset(root_name==' root_0') %>%
   group_by(root) %>%
@@ -110,39 +84,7 @@ early.growth %>%
   filter(date == max(date)) %>%
   mutate(growth = position/date) %>%
   left_join(., early.data, by = "root") %>%
-  select('variety','root','position','date','growth','diameter') -> primary
-```
-
-## node
-
-```{r, echo=TRUE}
-node$variety = as.factor(node$variety)
-```
-
-## End data
-
-```{r, echo=TRUE}
-end.global %>%
-    select('root_name','root','diameter','root_ontology','parent','parent_name','variety','child_density') %>%
-    mutate(parent_diameter = ifelse(parent != '-1', diameter[match(parent, root)],NA)) %>%
-    mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) -> end.data
-```
-
-# Estimation des paramètres
-
-## Dmin
-
-Prendre, pour chaque nodale, la latérale la plus petite.
-
-```{r, echo=TRUE}
-subset(end.data, root_ontology==" Lateral root") %>%
-  diameter_outliers(.) %>%
-  ggplot(aes(x=variety,y=diameter))+
-  geom_boxplot()+
-  stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='lateral root')+
-  theme_gray()
-
+  select('variety','root','position','date','growth','diameter') -> early.growth
 ```
 
 ## Croissance
@@ -150,7 +92,7 @@ subset(end.data, root_ontology==" Lateral root") %>%
 **Boxplot **
 
 ```{r, echo=TRUE}
-primary %>% 
+early.growth %>% 
   ggplot(aes(x=variety,y=growth))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
@@ -163,7 +105,7 @@ primary %>%
 **Anova **
 
 ```{r, echo=TRUE}
-primary %>%
+early.growth %>%
   lm(growth ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
@@ -234,6 +176,25 @@ summary(mod)
 plot(mod)
 ```
 
+
+# End stage 
+
+```{r, echo=TRUE}
+end.data <- data.frame()
+for (variety in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
+  paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variety,".csv") %>%
+    read.csv() %>% 
+    mutate(variety = factor(variety)) %>%
+    select('root_name','root','diameter','root_ontology','parent','parent_name','variety') %>%
+    mutate(parent_diameter = ifelse(parent != '-1', diameter[match(parent, root)],NA)) %>%
+    mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
+    rbind(end.data,.) -> end.data
+}
+summary(end.data)
+# Fichier avec nombre par noeud
+node <- read_excel("End_growth_root_data/root_data/0.global_root_data/node.xlsx")
+node$variety = as.factor(node$variety)
+```
 
 ## Nombre de racine nodale par noeud
 
@@ -317,7 +278,13 @@ pander(leveneTest(mod, center = "median"))
 
 ```{r, echo=TRUE}
 # Boxplot lateral
-
+subset(end.data, root_ontology==" Lateral root") %>%
+  diameter_outliers(.) %>%
+  ggplot(aes(x=variety,y=diameter))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='lateral root')+
+  theme_gray()
 ```
 
 **Anova**
