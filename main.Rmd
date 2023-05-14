@@ -34,6 +34,7 @@ library(stringr)
 library(pander)
 library(car)
 library(archiDART)
+library(ggpubr)
 ```
 
 # Fonction utiles
@@ -94,7 +95,6 @@ for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
     mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) %>%
     rbind(early.data,.) -> early.data
 }
-
 ```
 
 ## Primary data
@@ -132,6 +132,7 @@ end.global %>%
 ## Dmin
 
 Prendre, pour chaque nodale, la latérale la plus petite.  
+end.data
 
 ```{r, echo=TRUE}
 Dmin <- aggregate(diameter ~ parent+variety+parent_name, data=end.data,FUN=min)
@@ -199,7 +200,7 @@ Le Dmax global des racines est de : `r Dmax`.
 
 ## Drange
 
-Drange, la range relative de diamètre, est calculé avec les diamètre extrème comme :
+Drange, la range relative de diamètre, est calculé avec les diamètre extrême comme :
 $$ 2*\frac{D_{max}-D_{min}}{D_{max}+D_{min}} $$
 
 ```{r, echo=TRUE}
@@ -208,21 +209,22 @@ $$ 2*\frac{D_{max}-D_{min}}{D_{max}+D_{min}} $$
 
 ## IBD : inter-branch distance
 
-IBD est calculé comme la valeur moyenne de la distance entre latérales voisines.
+IBD est calculé comme la valeur moyenne de la distance entre latérales voisines.  
+Sur early data parcque tendu de tout voir sur fin de culture.
 
 ```{r, echo=TRUE}
-early.data %>%
+branching <- early.data %>%
   subset(root_name==' root_0') %>%
-  mutate(IBD=1/child_density) %>%
+  mutate(IBD=1/child_density)
+
+branching %>%
   ggplot(aes(x=variety,y=IBD))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
   labs(title='IBD',y='IBD [cm]')+
   theme_classic()
 
-early.data %>%
-  subset(root_name==' root_0') %>%
-  mutate(IBD=1/child_density) %>%
+branching %>%
   lm(IBD ~ variety, data=.) -> mod
 summary(mod)
 pander(anova(mod))
@@ -232,10 +234,30 @@ par(mfrow = c(1,1))
 pander(leveneTest(mod, center = "median"))
 ```
 
-## 5
+## DIDm
+
+Pente de la régression linéaire du diamètre des racines latérales vs. leur racine mère.  
 
 ```{r, echo=TRUE}
+end.data %>%
+  diameter_outliers() %>%
+  ggplot(aes(x=parent_diameter,y=diameter))+
+  geom_boxplot()
+  
+end.data %>%
+  diameter_outliers() %>%
+  ggplot(aes(x=parent_diameter,y=diameter))+
+  geom_point(size=0.8)+
+  geom_smooth(method = "lm")+
+  scale_y_continuous(limits = c(0,0.075))
 
+end.data %>%
+  diameter_outliers() %>%
+  lm(diameter~parent_diameter,data=.) -> mod
+pander(summary(mod))
+par(mfrow=c(2,2))
+plot(mod)
+par(mfrow=c(1,1))
 ```
 
 ## Autres paramètres
