@@ -211,7 +211,25 @@ $$ 2*\frac{D_{max}-D_{min}}{D_{max}+D_{min}} $$
 IBD est calculé comme la valeur moyenne de la distance entre latérales voisines.
 
 ```{r, echo=TRUE}
+early.data %>%
+  subset(root_name==' root_0') %>%
+  mutate(IBD=1/child_density) %>%
+  ggplot(aes(x=variety,y=IBD))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='IBD',y='IBD [cm]')+
+  theme_classic()
 
+early.data %>%
+  subset(root_name==' root_0') %>%
+  mutate(IBD=1/child_density) %>%
+  lm(IBD ~ variety, data=.) -> mod
+summary(mod)
+pander(anova(mod))
+par(mfrow = c(2,2))
+plot(mod)
+par(mfrow = c(1,1))
+pander(leveneTest(mod, center = "median"))
 ```
 
 ## 5
