@@ -35,6 +35,7 @@ library(pander)
 library(car)
 library(archiDART)
 library(ggpubr)
+library(lsmeans)
 ```
 
 # Fonction utiles
@@ -127,11 +128,14 @@ end.global %>%
     mutate(ratio_diameter = ifelse(parent_name != '-1', diameter/parent_diameter, NA)) -> end.data
 ```
 
-# Estimation des paramètres
+# Estimation des cinq paramètres
 
 ## Dmin
 
+### Data
+
 Prendre, pour chaque nodale, la latérale la plus petite.  
+Enlève les outliers par variétés.  
 end.data
 
 ```{r, echo=TRUE}
@@ -142,125 +146,258 @@ for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
     diameter_outliers(.) %>%
     rbind(Dmin_clean,.) -> Dmin_clean
 }
+```
 
-#plot(density(min_dia_clean$diameter))
+### Stats descriptive
 
+```{r, echo=TRUE}
 ggplot(data=Dmin_clean, aes(x=variety,y=diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='Plus petite latérale de chaque racine nodale')+
+  labs(title='Diamètre minimum de lateral pour chaque nodale')+
   theme_gray()
-
-mod <- lm(diameter ~ variety, data = Dmin_clean)
-summary(mod)
-anova(mod)
-par(mfrow=c(2,2))
-plot(mod)
-par(mfrow=c(1,1))
 ```
 
-Observe les distributions et test anova pour voir si similaire/différent.  
-Récupère le 2 ème percentile des distributions de Dmin pour estimer le paramètre.
+### Modèle 
+
+```{r, echo=TRUE}
+mod_min <- lm(diameter ~ variety, data = Dmin_clean)
+summary(mod_min)
+anova(mod_min)
+```
+
+Observe les distributions et test anova pour voir si similaire/différent.
+
+### Hypothèse sous-jacente
+
+```{r, echo=TRUE}
+par(mfrow=c(2,2))
+plot(mod_min)
+par(mfrow=c(1,1))
+pander(leveneTest(mod_min, center = "median"))
+```
+
+Test levene pour homogénéité de la variance. 
+
+### Inférence 
+
+```{r, echo=TRUE}
+lsm <- lsmeans(mod_min, pairwise ~ variety)
+summary(lsm)
+plot(lsm)
+paste('La moyenne de toute les variétés sauf Vegga =',
+      mean(subset(Dmin_clean,!(variety=='Vegga'))$diameter))
+```
+
+Récupère la moyenne des distributions de Dmin pour estimer le paramètre.
 
 ## Dmax
 
 Regarde les distributions de diamètres des racines nodales.  
 
+### Data 
+
 ```{r, echo=TRUE}
-nodal <- subset(end.data, root_ontology==" Root") %>%
+nodal_clean <- subset(end.data, root_ontology==" Root") %>%
   diameter_outliers(.)
-# Boxplot nodal 
-nodal %>%
+```
+
+### Stat descriptive
+
+```{r, echo=TRUE}
+nodal_clean %>%
   ggplot(aes(x=variety,y=diameter))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
   labs(title='nodal root')+
   theme_classic()
+```
 
-# Anova
-nodal %>%
-  lm(diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
+### Modèle 
+
+```{r, echo=TRUE}
+mod_max <- lm(diameter ~ variety, data=nodal_clean)
+summary(mod_max)
+pander(anova(mod_max))
+```
+
+### Hypothèse
+
+```{r, echo=TRUE}
 par(mfrow = c(2,2))
-plot(mod)
+plot(mod_max)
 par(mfrow = c(1,1))
-pander(leveneTest(mod, center = "median"))
+pander(leveneTest(mod_max, center = "median"))
+```
+
+### Inférence
+
+```{r, echo=TRUE}
+Dmax <- max(nodal_clean$diameter)
+paste('Le Dmax global pour les six variétés est',Dmax)
 ```
 
 Voir similitude ou différence sur base de distribution et modèle anova.  
-Récupère les plus gros diamètres.
-
-```{r, echo=TRUE}
-Dmax <- max(nodal$diameter)
-```
-
-Dmax coresspond au diamètre maximum de la distribution des racines nodales observées.  
-Le Dmax global des racines est de : `r Dmax`.
+Récupère les plus gros diamètres.  
+Dmax correspond au diamètre maximum de la distribution des racines nodales observées.  
 
 ## Drange
 
 Drange, la range relative de diamètre, est calculé avec les diamètre extrême comme :
-$$ 2*\frac{D_{max}-D_{min}}{D_{max}+D_{min}} $$
+$$ 2*\frac{D_{max}-D_{min}}{D_{max}+D_{min}} $$.  
+Le Drange est mesuré pour chaque racine nodale avec Dmex le diamètre de la nodale et Dmin le diamètre de sa latérale la plus fine.
+
+### Data 
 
 ```{r, echo=TRUE}
+Drange <- aggregate(diameter ~ parent+variety+parent_name+parent_diameter, data=end.data,FUN=min) %>%
+  mutate(Drange=2*(parent_diameter-diameter)/(parent_diameter+diameter))
 
+Drange_clean <- data.frame()
+for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
+  subset(Drange, variety==variete) %>%
+    diameter_outliers(.) %>%
+    rbind(Drange_clean,.) -> Drange_clean
+}
+```
+
+### Stats descriptive
+
+```{r, echo=TRUE}
+Drange_clean %>%
+  ggplot(aes(x=variety,y=Drange))+
+  geom_boxplot()+
+  stat_summary(fun=mean, geom="point", shape=23, size=4)+
+  labs(title='Drange')+
+  theme_classic()
+```
+
+### Modèle
+
+```{r, echo=TRUE}
+mod_range <- lm(Drange ~ variety, data=Drange_clean)
+summary(mod_range)
+pander(anova(mod_range))
+```
+
+### Hypothèse
+
+```{r, echo=TRUE}
+par(mfrow = c(2,2))
+plot(mod_range)
+par(mfrow = c(1,1))
+pander(leveneTest(mod_range, center = "median"))
+```
+
+### Inférence
+
+```{r, echo=TRUE}
+lsm <- lsmeans(mod_range, pairwise ~ variety)
+summary(lsm)
+plot(lsm)
+paste('La moyenne de toute les variétés sauf Juno =',
+      mean(subset(Drange_clean,!(variety=='Juno'))$Drange))
 ```
 
 ## IBD : inter-branch distance
 
 IBD est calculé comme la valeur moyenne de la distance entre latérales voisines.  
-Sur early data parcque tendu de tout voir sur fin de culture.
+Sur early data parce que tendu de tout voir sur fin de culture.
+
+### Data
 
 ```{r, echo=TRUE}
 branching <- early.data %>%
   subset(root_name==' root_0') %>%
   mutate(IBD=1/child_density)
+```
 
+### Stats descriptive
+
+```{r, echo=TRUE}
 branching %>%
   ggplot(aes(x=variety,y=IBD))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
   labs(title='IBD',y='IBD [cm]')+
   theme_classic()
+```
 
-branching %>%
-  lm(IBD ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
+### Modèle
+
+```{r, echo=TRUE}
+mod_IBD <- lm(IBD ~ variety, data=branching)
+summary(mod_IBD)
+pander(anova(mod_IBD))
+```
+
+### Hypothèse
+
+```{r, echo=TRUE}
 par(mfrow = c(2,2))
-plot(mod)
+plot(mod_IBD)
 par(mfrow = c(1,1))
-pander(leveneTest(mod, center = "median"))
+pander(leveneTest(mod_IBD, center = "median"))
+```
+
+### Inférence
+
+```{r, echo=TRUE}
+lsm <- lsmeans(mod_IBD, pairwise ~ variety)
+summary(lsm)
+plot(lsm)
 ```
 
 ## DIDm
 
 Pente de la régression linéaire du diamètre des racines latérales vs. leur racine mère.  
 
+### Data
+
 ```{r, echo=TRUE}
-end.data %>%
-  diameter_outliers() %>%
-  ggplot(aes(x=parent_diameter,y=diameter))+
-  geom_boxplot()
-  
-end.data %>%
-  diameter_outliers() %>%
-  ggplot(aes(x=parent_diameter,y=diameter))+
+lateral.clean <- data.frame()
+for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
+  filter(end.data, variety==variete,root_ontology==' Lateral root') %>%
+    diameter_outliers(.) %>%
+    rbind(lateral.clean,.) -> lateral.clean
+}
+```
+
+### Stats descriptive
+
+```{r, echo=TRUE}
+lateral.clean %>%
+  ggplot(aes(x=parent_diameter,y=diameter,col=variety))+
   geom_point(size=0.8)+
   geom_smooth(method = "lm")+
   scale_y_continuous(limits = c(0,0.075))
+```
 
-end.data %>%
-  diameter_outliers() %>%
-  lm(diameter~parent_diameter,data=.) -> mod
-pander(summary(mod))
+### Modèle
+
+```{r, echo=TRUE}
+mod_DIDm <- lm(diameter~variety*parent_diameter,data=lateral.clean)
+summary(mod_DIDm)
+anova(mod_DIDm)
+summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='Biggben')))
+```
+
+### Hypothèse
+
+```{r, echo=TRUE}
 par(mfrow=c(2,2))
-plot(mod)
+plot(mod_DIDm)
 par(mfrow=c(1,1))
 ```
 
-## Autres paramètres
+### Inférene
+
+```{r, echo=TRUE}
+
+```
+
+
+## Paramètre archisimple
 
 ```{r, echo=TRUE}
 
@@ -296,33 +433,6 @@ plot(mod)
 pander(leveneTest(mod, center = "median"))
 ```
 
-## Diamètre
-
-### Racine primaire
-
-**Boxplot **
-
-```{r eval=FALSE, include=FALSE}
-# Boxplot nodal 
-subset(early.data, root_name==" root_0") %>%
-  ggplot(aes(x=variety,y=diameter))+
-  geom_boxplot()+
-  stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='Primary root')+
-  theme_classic()
-```
-
-**Anova **
-
-```{r eval=FALSE, include=FALSE}
-subset(early.data, root_name==" root_0") %>%
-  lm(diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
 
 ### Rapport diamètre fille/primaire
 
@@ -378,25 +488,6 @@ pander(left_join(
 ))
 ```
 
-## Diamètre
-
-### Racine nodales
-
-**Boxplot **
-
-```{r, echo=TRUE}
-
-```
-
-**Anova **
-
-```{r, echo=TRUE}
-
-```
-
-### Rapport diamètre fille/mère
-
-**Boxplot**
 
 ```{r eval=FALSE, include=FALSE}
 subset(end.data,root_ontology==' Lateral root') %>%
@@ -447,67 +538,5 @@ pander(leveneTest(mod, center = "median"))
 
 ```
 
-```{r, echo=TRUE}
 
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
-
-```{r, echo=TRUE}
-
-```
 
