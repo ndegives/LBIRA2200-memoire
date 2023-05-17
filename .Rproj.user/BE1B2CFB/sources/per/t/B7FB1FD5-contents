@@ -236,8 +236,12 @@ pander(leveneTest(mod_max, center = "median"))
 ### Inférence
 
 ```{r, echo=TRUE}
+lsm <- lsmeans(mod_max, pairwise ~ variety)
+pander(summary(lsm))
+plot(lsm)
 Dmax <- max(nodal_clean$diameter)
 paste('Le Dmax global pour les six variétés est',Dmax)
+
 ```
 
 Voir similitude ou différence sur base de distribution et modèle anova.  
