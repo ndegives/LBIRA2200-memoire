@@ -151,10 +151,11 @@ for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
 ### Stats descriptive
 
 ```{r, echo=TRUE}
-ggplot(data=Dmin_clean, aes(x=variety,y=diameter))+
+ggplot(data=Dmin_clean, aes(x=variety,y=diameter*10))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='Diamètre minimum de lateral pour chaque nodale')+
+  labs(title='Distribution de la latérale la plus fine pour chaque racine nodale en fonction de la variété de sorgho',
+       x='Variété', y='Diamètre [mm]')+
   theme_gray()
 ```
 
@@ -162,8 +163,8 @@ ggplot(data=Dmin_clean, aes(x=variety,y=diameter))+
 
 ```{r, echo=TRUE}
 mod_min <- lm(diameter ~ variety, data = Dmin_clean)
-summary(mod_min)
-anova(mod_min)
+pander(summary(mod_min))
+pander(anova(mod_min))
 ```
 
 Observe les distributions et test anova pour voir si similaire/différent.
@@ -183,13 +184,14 @@ Test levene pour homogénéité de la variance.
 
 ```{r, echo=TRUE}
 lsm <- lsmeans(mod_min, pairwise ~ variety)
-summary(lsm)
+pander(summary(lsm))
 plot(lsm)
 paste('La moyenne de toute les variétés sauf Vegga =',
       mean(subset(Dmin_clean,!(variety=='Vegga'))$diameter))
 ```
 
-Récupère la moyenne des distributions de Dmin pour estimer le paramètre.
+Récupère la moyenne des distributions de Dmin pour estimer le paramètre.   
+Méthide Tukey pour l'ajustement de p-valeur.
 
 ## Dmax
 
@@ -206,18 +208,19 @@ nodal_clean <- subset(end.data, root_ontology==" Root") %>%
 
 ```{r, echo=TRUE}
 nodal_clean %>%
-  ggplot(aes(x=variety,y=diameter))+
+  ggplot(aes(x=variety,y=diameter*10))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='nodal root')+
-  theme_classic()
+  labs(title='Distribution des diamètre de nodale en fonction de la variétés de sorgho',
+       x='Variété', y='Diamètre [mm]')+
+  theme_gray()
 ```
 
 ### Modèle 
 
 ```{r, echo=TRUE}
 mod_max <- lm(diameter ~ variety, data=nodal_clean)
-summary(mod_max)
+pander(summary(mod_max))
 pander(anova(mod_max))
 ```
 
@@ -269,14 +272,14 @@ Drange_clean %>%
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
   labs(title='Drange')+
-  theme_classic()
+  theme_gray()
 ```
 
 ### Modèle
 
 ```{r, echo=TRUE}
 mod_range <- lm(Drange ~ variety, data=Drange_clean)
-summary(mod_range)
+pander(summary(mod_range))
 pander(anova(mod_range))
 ```
 
@@ -293,7 +296,7 @@ pander(leveneTest(mod_range, center = "median"))
 
 ```{r, echo=TRUE}
 lsm <- lsmeans(mod_range, pairwise ~ variety)
-summary(lsm)
+pander(summary(lsm))
 plot(lsm)
 paste('La moyenne de toute les variétés sauf Juno =',
       mean(subset(Drange_clean,!(variety=='Juno'))$Drange))
@@ -316,10 +319,10 @@ branching <- early.data %>%
 
 ```{r, echo=TRUE}
 branching %>%
-  ggplot(aes(x=variety,y=IBD))+
+  ggplot(aes(x=variety,y=IBD*10))+
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='IBD',y='IBD [cm]')+
+  labs(title='IBD',x='variété',y='IBD [mm]')+
   theme_classic()
 ```
 
@@ -327,7 +330,7 @@ branching %>%
 
 ```{r, echo=TRUE}
 mod_IBD <- lm(IBD ~ variety, data=branching)
-summary(mod_IBD)
+pander(summary(mod_IBD))
 pander(anova(mod_IBD))
 ```
 
@@ -344,7 +347,7 @@ pander(leveneTest(mod_IBD, center = "median"))
 
 ```{r, echo=TRUE}
 lsm <- lsmeans(mod_IBD, pairwise ~ variety)
-summary(lsm)
+pander(summary(lsm))
 plot(lsm)
 ```
 
@@ -370,6 +373,7 @@ lateral.clean %>%
   ggplot(aes(x=parent_diameter,y=diameter,col=variety))+
   geom_point(size=0.8)+
   geom_smooth(method = "lm")+
+  labs(x='Diamètre racines parentes',y='Diamètre racine fille',col='variété')+
   scale_y_continuous(limits = c(0,0.075))
 ```
 
@@ -377,9 +381,9 @@ lateral.clean %>%
 
 ```{r, echo=TRUE}
 mod_DIDm <- lm(diameter~variety*parent_diameter,data=lateral.clean)
-summary(mod_DIDm)
-anova(mod_DIDm)
-summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='Biggben')))
+pander(summary(mod_DIDm))
+pander(anova(mod_DIDm))
+pander(summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='Biggben'))))
 ```
 
 ### Hypothèse
@@ -397,7 +401,7 @@ par(mfrow=c(1,1))
 ```
 
 
-## Paramètre archisimple
+# Paramètre archisimple
 
 ```{r, echo=TRUE}
 
