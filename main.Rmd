@@ -327,7 +327,7 @@ branching %>%
   geom_boxplot()+
   stat_summary(fun=mean, geom="point", shape=23, size=4)+
   labs(title='IBD',x='variété',y='IBD [mm]')+
-  theme_classic()
+  theme_gray()
 ```
 
 ### Modèle
