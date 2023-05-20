@@ -162,7 +162,7 @@ ggplot(data=Dmin_clean, aes(x=variety,y=diameter*10))+
 ### Modèle 
 
 ```{r, echo=TRUE}
-mod_min <- lm(diameter ~ variety, data = Dmin_clean)
+mod_min <- lm(diameter*10 ~ variety, data = Dmin_clean)
 pander(summary(mod_min))
 pander(anova(mod_min))
 ```
@@ -187,11 +187,11 @@ lsm <- lsmeans(mod_min, pairwise ~ variety)
 pander(summary(lsm))
 plot(lsm)
 paste('La moyenne de toute les variétés sauf Vegga =',
-      mean(subset(Dmin_clean,!(variety=='Vegga'))$diameter))
+      mean(subset(Dmin_clean,!(variety=='Vegga'))$diameter)*10)
 ```
 
 Récupère la moyenne des distributions de Dmin pour estimer le paramètre.   
-Méthide Tukey pour l'ajustement de p-valeur.
+Méthode Tukey pour l'ajustement de p-valeur.
 
 ## Dmax
 
@@ -219,7 +219,7 @@ nodal_clean %>%
 ### Modèle 
 
 ```{r, echo=TRUE}
-mod_max <- lm(diameter ~ variety, data=nodal_clean)
+mod_max <- lm(diameter*10 ~ variety, data=nodal_clean)
 pander(summary(mod_max))
 pander(anova(mod_max))
 ```
@@ -239,7 +239,7 @@ pander(leveneTest(mod_max, center = "median"))
 lsm <- lsmeans(mod_max, pairwise ~ variety)
 pander(summary(lsm))
 plot(lsm)
-Dmax <- max(nodal_clean$diameter)
+Dmax <- max(nodal_clean$diameter)*10
 paste('Le Dmax global pour les six variétés est',Dmax)
 
 ```
@@ -302,8 +302,8 @@ pander(leveneTest(mod_range, center = "median"))
 lsm <- lsmeans(mod_range, pairwise ~ variety)
 pander(summary(lsm))
 plot(lsm)
-paste('La moyenne de toute les variétés sauf Juno =',
-      mean(subset(Drange_clean,!(variety=='Juno'))$Drange))
+paste('La moyenne de toute les variétés =',
+      mean(Drange_clean$Drange))
 ```
 
 ## IBD : inter-branch distance
@@ -333,7 +333,7 @@ branching %>%
 ### Modèle
 
 ```{r, echo=TRUE}
-mod_IBD <- lm(IBD ~ variety, data=branching)
+mod_IBD <- lm(IBD*10 ~ variety, data=branching)
 pander(summary(mod_IBD))
 pander(anova(mod_IBD))
 ```
@@ -353,6 +353,14 @@ pander(leveneTest(mod_IBD, center = "median"))
 lsm <- lsmeans(mod_IBD, pairwise ~ variety)
 pander(summary(lsm))
 plot(lsm)
+
+hypothesis <- list("Amiggo - Vegga = 0" = c(1,0,0,0,0,-1),
+                   "Biggben - Vegga = 0" = c(0,1,0,0,0,-1),
+                   "Hyperion - Vegga = 0" = c(0,0,1,0,0,-1),
+                   "Juno - Vegga = 0" = c(0,0,0,1,0,-1),
+                   "Swingg - Vegga = 0" = c(0,0,0,0,1,-1))
+contrast(lsm$lsmeans, hypothesis)
+paste('IBD moyen pour les six variété =',mean(branching$IBD)*10)
 ```
 
 ## DIDm
@@ -365,6 +373,8 @@ Pente de la régression linéaire du diamètre des racines latérales vs. leur r
 lateral.clean <- data.frame()
 for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
   filter(end.data, variety==variete,root_ontology==' Lateral root') %>%
+    mutate(diameter=diameter*10) %>%
+    mutate(parent_diameter=parent_diameter*10) %>%
     diameter_outliers(.) %>%
     rbind(lateral.clean,.) -> lateral.clean
 }
@@ -377,13 +387,14 @@ lateral.clean %>%
   ggplot(aes(x=parent_diameter,y=diameter,col=variety))+
   geom_point(size=0.8)+
   geom_smooth(method = "lm")+
-  labs(x='Diamètre racines parentes',y='Diamètre racine fille',col='variété')+
-  scale_y_continuous(limits = c(0,0.075))
+  labs(x='Diamètre racines parentes [mm]',y='Diamètre racine fille [mm]',col='variété')+
+  scale_y_continuous(limits = c(0,0.7))
 ```
 
 ### Modèle
 
 ```{r, echo=TRUE}
+min_dia <- min(lateral.clean$diameter)
 mod_DIDm <- lm(diameter~variety*parent_diameter,data=lateral.clean)
 pander(summary(mod_DIDm))
 pander(anova(mod_DIDm))
@@ -396,6 +407,7 @@ pander(summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='B
 par(mfrow=c(2,2))
 plot(mod_DIDm)
 par(mfrow=c(1,1))
+pander(leveneTest(mod_DIDm, center = "median"))
 ```
 
 ### Inférene
