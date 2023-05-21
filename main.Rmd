@@ -419,6 +419,21 @@ pander(leveneTest(mod_DIDm, center = "median"))
 
 # Paramètre archisimple
 
+## Croissance vs diamètre
+
+```{r eval=FALSE, include=FALSE}
+primary %>%
+  ggplot(aes(x=diameter,y=growth))+
+  geom_point(size=0.8)+
+  geom_smooth(method = "lm")+
+  labs()
+
+mod <- lm(growth~diameter, data=primary)
+summary(mod)
+plot(mod)
+plot(primary$diameter,primary$growth)
+```
+
 ```{r, echo=TRUE}
 
 ```
@@ -478,14 +493,6 @@ pander(anova(mod))
 par(mfrow = c(2,2))
 plot(mod)
 pander(leveneTest(mod, center = "median"))
-```
-
-## Croissance vs diamètre
-
-```{r eval=FALSE, include=FALSE}
-mod <- lm(growth~diameter*variety, data=early.growth)
-summary(mod)
-plot(mod)
 ```
 
 

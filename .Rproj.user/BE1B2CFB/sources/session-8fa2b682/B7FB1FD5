@@ -3,7 +3,7 @@
     "path": "C:/Nico/Github/Memoire/main.Rmd",
     "project_path": "main.Rmd",
     "type": "r_markdown",
-    "hash": "123323540",
+    "hash": "4125156162",
     "contents": "",
     "dirty": false,
     "created": 1683202469680.0,
@@ -13,16 +13,16 @@
         "chunk_output_type": "console",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "357,7",
-        "scrollLine": "351",
-        "docOutlineVisible": "1"
+        "cursorPosition": "430,40",
+        "scrollLine": "415",
+        "docOutlineVisible": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1684594742,
+    "lastKnownWriteTime": 1684691871,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1684594742907,
+    "last_content_update": 1684691871413,
     "read_only": false,
     "read_only_alternatives": []
 }
