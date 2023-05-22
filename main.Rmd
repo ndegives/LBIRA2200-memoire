@@ -394,8 +394,7 @@ lateral.clean %>%
 ### Modèle
 
 ```{r, echo=TRUE}
-min_dia <- min(lateral.clean$diameter)
-mod_DIDm <- lm(diameter~variety*parent_diameter,data=lateral.clean)
+mod_DIDm <- lm(diameter~variety*parent_diameter ,data=lateral.clean)
 pander(summary(mod_DIDm))
 pander(anova(mod_DIDm))
 pander(summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='Biggben'))))
@@ -407,10 +406,14 @@ pander(summary(lm(diameter~parent_diameter,data=subset(lateral.clean,variety=='B
 par(mfrow=c(2,2))
 plot(mod_DIDm)
 par(mfrow=c(1,1))
-pander(leveneTest(mod_DIDm, center = "median"))
 ```
 
 ### Inférene
+
+```{r, echo=TRUE}
+lsm <- lsmeans(mod_DIDm, pairwise ~ variety)
+pander(summary(lsm))
+```
 
 ```{r, echo=TRUE}
 
@@ -419,7 +422,9 @@ pander(leveneTest(mod_DIDm, center = "median"))
 
 # Paramètre archisimple
 
-## Croissance vs diamètre
+## EL
+
+### Plot
 
 ```{r eval=FALSE, include=FALSE}
 primary %>%
@@ -427,12 +432,20 @@ primary %>%
   geom_point(size=0.8)+
   geom_smooth(method = "lm")+
   labs()
-
-mod <- lm(growth~diameter, data=primary)
-summary(mod)
-plot(mod)
-plot(primary$diameter,primary$growth)
 ```
+
+### Modèle
+
+```{r, echo=TRUE}
+mod_EL <- lm(growth~diameter, data=primary)
+summary(mod_EL)
+par(mfrow=c(2,2))
+plot(mod_EL)
+par(mfrow=c(1,1))
+```
+
+
+# Tableau paramètre
 
 ```{r, echo=TRUE}
 

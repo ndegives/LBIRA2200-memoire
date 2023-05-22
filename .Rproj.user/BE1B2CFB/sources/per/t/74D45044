@@ -1,0 +1,28 @@
+{
+    "id": "74D45044",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1684745914574.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "id": "f16e207662ab45bc8f4c2c5ae243d6d5",
+        "name": "mod_EL",
+        "title": "mod_EL",
+        "language": "R",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 4212117314271911968,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1684745914574,
+    "read_only": false,
+    "read_only_alternatives": []
+}
