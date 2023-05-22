@@ -410,13 +410,17 @@ par(mfrow=c(1,1))
 
 ### Inférene
 
+Comparaison des variétés 2 à 2  
+
 ```{r, echo=TRUE}
-lsm <- lsmeans(mod_DIDm, pairwise ~ variety)
+lsm <- emmeans(mod_DIDm, pairwise ~ variety)
 pander(summary(lsm))
 ```
 
-```{r, echo=TRUE}
+Comparaison 2 à 2 des pentes
 
+```{r, echo=TRUE}
+emtrends(mod_DIDm, pairwise ~ variety, var='parent_diameter')
 ```
 
 
