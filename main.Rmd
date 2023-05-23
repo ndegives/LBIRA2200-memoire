@@ -423,7 +423,6 @@ Comparaison 2 à 2 des pentes
 emtrends(mod_DIDm, pairwise ~ variety, var='parent_diameter')
 ```
 
-
 # Paramètre archisimple
 
 ## EL
@@ -457,62 +456,6 @@ par(mfrow=c(1,1))
 
 # Annexe
 
-
-## Croissance
-
-**Boxplot **
-
-```{r eval=FALSE, include=FALSE}
-primary %>% 
-  ggplot(aes(x=variety,y=growth))+
-  geom_boxplot()+
-  stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(x='variete',
-       y='growth [cm/day]',
-       title='Primary root grotwh ')+
-  theme_classic()
-```
-
-**Anova **
-
-```{r eval=FALSE, include=FALSE}
-primary %>%
-  lm(growth ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-
-### Rapport diamètre fille/primaire
-
-**Boxplot**
-
-
-```{r eval=FALSE, include=FALSE}
-early.data %>%
-  ggplot(aes(x=variety,y=ratio_diameter))+
-  geom_boxplot()+
-  stat_summary(fun=mean, geom="point", shape=23, size=4)+
-  labs(title='ratio root/parent_root')+
-  theme_gray()
-```
-
-**Anova**
-
-```{r eval=FALSE, include=FALSE}
-early.data %>%
-  lm(ratio_diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-
 ## Nombre de racine nodale par noeud
 
 ```{r eval=FALSE, include=FALSE}
@@ -542,45 +485,3 @@ subset(end.data,root_ontology==' Lateral root') %>%
   labs(title='ratio root/parent_root')+
   theme_gray()
 ```
-
-**Anova**
-
-```{r eval=FALSE, include=FALSE}
-subset(end.data,root_ontology==' Lateral root') %>%
-  diameter_outliers(.) %>%
-  lm(ratio_diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-### Lateral
-
-**Boxplot**
-
-```{r, echo=TRUE}
-# Boxplot lateral
-
-```
-
-**Anova**
-
-```{r eval=FALSE, include=FALSE}
-subset(end.data, root_ontology==" Lateral root") %>%
-  diameter_outliers(.) %>%
-  lm(diameter ~ variety, data=.) -> mod
-summary(mod)
-pander(anova(mod))
-par(mfrow = c(2,2))
-plot(mod)
-pander(leveneTest(mod, center = "median"))
-```
-
-```{r, echo=TRUE}
-
-```
-
-
-
