@@ -3,8 +3,8 @@
 library(tidyverse)
 library(xml2)
 ### READ function
-
-path <- "~/Dropbox/science/projects/archisimple/archisimple/src/archisimple93/parameter2.xml"
+# "C:/Nico/Github/Memoire/ArchiSimple/src/archisimple93/parameter.xml"
+path <- "C:/Nico/Github/Memoire/ArchiSimple/src/archisimple93/parameter.xml"
 options(scipen = 999) 
 
 ## READ AN ARCHISIMPLE XML FILE AND TRANFORM INTO A TABLE
