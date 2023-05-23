@@ -54,12 +54,14 @@ setwd("../../../")
 
 ## From the side
 for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
-  subset(sims,sim==variety) %>%
-    ggplot() +
-    theme_classic() +
-    geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2), alpha=0.9) +
-    coord_fixed()+
-    labs(title=variety)
+  print(
+    subset(sims,sim==variety) %>%
+      ggplot() +
+      theme_classic() +
+      geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2), alpha=0.9) +
+      coord_fixed()+
+      labs(title=variety)
+    )
 }
 # From the top (le dernier uniquement)
 rs %>%
