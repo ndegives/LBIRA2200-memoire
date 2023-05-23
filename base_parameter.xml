@@ -8,23 +8,23 @@
   <dmin>0.1567</dmin>
   <dSem>0.6</dSem>
   <EL>33.0344</EL>
-  <erAdv>1.2</erAdv>
+  <erAdv>0.8</erAdv>
   <erSem>1</erSem>
   <exportName>myroot</exportName>
   <exportType>1</exportType>
-  <GDs>400</GDs>
+  <GDs>100</GDs>
   <IPD>1.6761</IPD>
-  <LDC>3000</LDC>
+  <LDC>1000</LDC>
   <maxAdv>54</maxAdv>
   <maxSem>1</maxSem>
   <pdmax>0.8</pdmax>
   <pdmin>0</pdmin>
-  <PDT>2.60156249999997</PDT>
+  <PDT>4.5</PDT>
   <RDM>0.1874</RDM>
   <SGC>0</SGC>
   <sim_length>60</sim_length>
-  <simtime>14.9609375</simtime>
+  <simtime>140</simtime>
   <TMD>0.1</TMD>
-  <TrInt>0.01</TrInt>
+  <TrInt>0.002</TrInt>
   <TrT>1</TrT>
 </Plant>
