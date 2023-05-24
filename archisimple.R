@@ -13,7 +13,7 @@ params <- read_archisimple_xml("base_parameter.xml")
 
 # Insérer les différents paramètres à modifier dans le batch -------------------
 
-par <- data.frame(sim_length = rep(140,6),
+par <- data.frame(sim_length = rep(0,6),
                   dmin=c(      0.1567  ,0.1567  ,0.1567   ,0.1567  ,0.1567  ,0.1297),
                   RDM = c(     0.1874  ,0.2022  ,0.228    ,0.17545 ,0.1745  ,0.1611),
                   CVDD = c(    0.3     ,0.3     ,0.3      ,0.3     ,0.3     ,0.3))
