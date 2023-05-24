@@ -428,11 +428,23 @@ emtrends(mod_DIDm, pairwise ~ variety, var='parent_diameter')
 
 ## CVDD
 
-Le coefficient de variation CVDD est estimé sur base de la régression linéaire entre l'écart-type et la moyenne des racines filles selon leur racines mère.
+Le coefficient de variation CVDD est estimé sur base de la régression linéaire entre les résidus et les valeurs estimée par le modèle = lm(diameter~variety*parent_diameter).
 
 ```{r, echo=TRUE}
-plot(abs(mod_DIDm$residuals),mod_DIDm$fitted.values)
-summary(lm(abs(mod_DIDm$residuals)~mod_DIDm$fitted.values-1))
+data.frame(x=mod_DIDm$fitted.values,y=abs(mod_DIDm$residuals)) %>%
+  ggplot(aes(x=x,y=y))+
+  geom_point(size=0.8)+
+  geom_smooth(method = "lm")+
+  labs(title='CVDD',x='residuals',y='fitted.values')
+
+paste(
+  'La pente de la régression linéaire passant par (0,0) des fitted.values en fonction des |résidus| =',
+  lm(abs(mod_DIDm$residuals)~mod_DIDm$fitted.values-1)$coef[['mod_DIDm$fitted.values']]
+)
+paste(
+  'La moyenne des |résidus|/fitted.values',
+  mean((abs(mod_DIDm$residuals))/mod_DIDm$fitted.values)
+)
 ```
 
 ## EL
