@@ -30,6 +30,7 @@ for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
   
   
   #Update les paramètres
+    ## Regarde chaque colone de params, si la même est dans par, il remplace la colonne de params par celle de par
   params <- params %>%
     mutate(across(everything(), ~ ifelse(cur_column() %in% names(par), par[inc,][[cur_column()]],.)))
   print(params)
