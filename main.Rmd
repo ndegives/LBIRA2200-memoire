@@ -426,6 +426,15 @@ emtrends(mod_DIDm, pairwise ~ variety, var='parent_diameter')
 
 # Paramètre archisimple
 
+## CVDD
+
+Le coefficient de variation CVDD est estimé sur base de la régression linéaire entre l'écart-type et la moyenne des racines filles selon leur racines mère.
+
+```{r, echo=TRUE}
+plot(abs(mod_DIDm$residuals),mod_DIDm$fitted.values)
+summary(lm(abs(mod_DIDm$residuals)~mod_DIDm$fitted.values-1))
+```
+
 ## EL
 
 ### Plot
