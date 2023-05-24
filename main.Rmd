@@ -437,6 +437,8 @@ data.frame(x=mod_DIDm$fitted.values,y=abs(mod_DIDm$residuals)) %>%
   geom_smooth(method = "lm")+
   labs(title='CVDD',x='residuals',y='fitted.values')
 
+pander(summary(lm(abs(mod_DIDm$residuals)~mod_DIDm$fitted.values-1)))
+
 paste(
   'La pente de la régression linéaire passant par (0,0) des fitted.values en fonction des |résidus| =',
   lm(abs(mod_DIDm$residuals)~mod_DIDm$fitted.values-1)$coef[['mod_DIDm$fitted.values']]
@@ -463,7 +465,7 @@ primary %>%
 
 ```{r, echo=TRUE}
 mod_EL <- lm(growth~diameter, data=primary)
-summary(mod_EL)
+pander(summary(mod_EL))
 par(mfrow=c(2,2))
 plot(mod_EL)
 par(mfrow=c(1,1))
