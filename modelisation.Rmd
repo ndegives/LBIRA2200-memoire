@@ -23,13 +23,40 @@ output:
 editor_options:
   chunk_output_type: console
 ---
-  
+
 ```{r setup, include=FALSE}
 rm(list = ls())
 library(tidyverse)
 library(data.table)
 setwd("C:/Nico/Github/Memoire")
 source("ArchiSimple/src/io_archisimple.R")
+```
+
+# Fonction pour run le modèle
+
+```{r, echo=TRUE}
+ArchiSimple <- function(par) {
+  setwd("ArchiSimple/src/archisimple93/")
+  inc <-0
+  for (variety in par$exportName) {
+    # Print l'avancé de la boucle
+    inc <- inc+1
+    print(paste("Simulation pour :", variety, "i=", inc, '========================'))
+    
+    
+    #Update les paramètres
+      ## Regarde chaque colone de params, si la même est dans par, il remplace la colonne de params par celle de par
+    params <- params %>%
+      mutate(across(everything(), ~ ifelse(cur_column() %in% names(par), par[inc,][[cur_column()]],.)))
+    print(params)
+    # Créaction du fichier paramètre lu par ArchiSimple
+    write_archisimple_XML(params, path = "parameter.xml")
+    
+    # Run ArchiSimple
+    system("./archisimple")
+  }
+  setwd("../../../")
+}
 ```
 
 # Sorgho
@@ -43,7 +70,7 @@ Importe le fichier 'base_parameter.xml' ainsi qu'un dataframe avec les valeurs q
 params <- read_archisimple_xml("base_parameter.xml")
 
 # Insérer les différents paramètres à modifier dans le batch
-par <- data.frame(
+par_sorgho <- data.frame(
     exportName=c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga'),
     dmin=c(      0.1567  ,0.1567  ,0.1567   ,0.1567  ,0.1567  ,0.1297),
     RDM = c(     0.1874  ,0.2022  ,0.228    ,0.17545 ,0.1745  ,0.1611),
@@ -54,27 +81,7 @@ par <- data.frame(
 ## Run le modèle
 
 ```{r, echo=TRUE}
-sims <- NULL
-setwd("ArchiSimple/src/archisimple93/")
-inc <-0
-for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
-  # Print l'avancé de la boucle
-  inc <- inc+1
-  print(paste("Simulation pour :", variety, "i=", inc, '========================'))
-  
-  
-  #Update les paramètres
-    ## Regarde chaque colone de params, si la même est dans par, il remplace la colonne de params par celle de par
-  params <- params %>%
-    mutate(across(everything(), ~ ifelse(cur_column() %in% names(par), par[inc,][[cur_column()]],.)))
-  print(params)
-  # Créaction du fichier paramètre lu par ArchiSimple
-  write_archisimple_XML(params, path = "parameter.xml")
-  
-  # Run ArchiSimple
-  system("./archisimple")
-}
-setwd("../../../") 
+ArchiSimple(par=par_sorgho)
 ```
 
 ## Résultats de la modélisation
@@ -86,7 +93,7 @@ setwd("ArchiSimple/src/archisimple93/")
 sims <- NULL
 for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
   rs <- fread(paste0(variety,'.txt')) %>%
-    mutate(sim = variety)
+    mutate(sim = as.factor(variety))
   sims <- rbind(sims,rs)
 }
 setwd("../../../") 
@@ -95,7 +102,7 @@ setwd("../../../")
 #### Plot en fonction du diamètre
 
 ```{r, echo=TRUE}
-for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
+for (variety in levels(sims$sim)) {
   print(
     subset(sims,sim==variety) %>%
       ggplot() +
@@ -122,8 +129,8 @@ archiDART::archidraw(inputrsml = 'ArchiSimple/src/archisimple93/', rsml.date="ag
 La fonction archiDART::root donne les attributs de chaque racine.
 
 ```{r, echo=TRUE}
-t <- archiDART::rsmlToTable('ArchiSimple/src/archisimple93/')
-archiDART::root(t)
+roots <- archiDART::rsmlToTable('ArchiSimple/src/archisimple93/')
+r <- archiDART::root(roots)
 ```
 
 # Maize
@@ -142,7 +149,7 @@ params_maize <- data.frame(
   EL =  51,
   erAdv = 0.8,
   erSem =  0.5,
-  exportName = 'myroot' ,
+  exportName = 'maize' ,
   exportType = 1,
   GDs = 50,
   IPD =  2,
@@ -155,7 +162,7 @@ params_maize <- data.frame(
   RDM =  0.12,
   SGC =  0,
   sim_length = 20,
-  simtime =  140,
+  simtime =  20,
   TMD =  0.08,
   TrInt = 0.01,
   TrT = 1 
@@ -165,5 +172,36 @@ params_maize <- data.frame(
 ## Run le modèle
 
 ```{r, echo=TRUE}
+ArchiSimple(par=params_maize)
+```
 
+## Résultats de la modélisation
+
+### ExportType = 1 , .txt
+
+```{r, echo=TRUE}
+setwd("ArchiSimple/src/archisimple93/")
+maize <- fread('maize.txt') %>%
+  mutate(sim='maize')
+setwd("../../../") 
+```
+
+#### Plot en fonction du diamètre
+
+```{r, echo=TRUE}
+maize %>%
+      ggplot() +
+      theme_classic() +
+      geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
+      scale_color_gradient(low = "blue", high = "red") +
+      coord_fixed()+
+      labs(title='Maize')
+```
+
+### ExportType = 2 , .RSML
+
+Le plot et l'importation des données est déjà fait avant.
+
+```{r, echo=TRUE}
+ 
 ```
