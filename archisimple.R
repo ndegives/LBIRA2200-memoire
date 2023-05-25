@@ -55,9 +55,9 @@ for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
 setwd("../../../") 
 
 
-# Plot..........................................................................
+# Observe..........................................................................
 
-## From the side
+## Plot
 for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
   print(
     subset(sims,sim==variety) %>%
@@ -69,6 +69,11 @@ for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
     )
 }
 
+## Chiffre
+
+t <- archiDART::rsmlToTable('ArchiSimple/src/archisimple93/')
+archiDART::root(t)
+archiDART::archidraw(inputrsml = 'ArchiSimple/src/archisimple93/', rsml.date="age", coldate=rainbow(15), lwd=2, twod=c("x", "y"), asp=1, las=1, bty="l")
 
 # Le maïs ----------------------------------------------------------------------
 

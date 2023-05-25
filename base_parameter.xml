@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Plant name="Sorgho" species="Amiggo">
-  <ageAdv>10</ageAdv>
+  <ageAdv>15</ageAdv>
   <CVDD>0.2449</CVDD>
-  <dAdv>1</dAdv>
+  <dAdv>0.8</dAdv>
   <distAdv>30</distAdv>
   <dmax>6.9845</dmax>
   <dmin>0.1567</dmin>
-  <dSem>1</dSem>
+  <dSem>0.1</dSem>
   <EL>33.0344</EL>
-  <erAdv>0.8</erAdv>
+  <erAdv>1.2</erAdv>
   <erSem>1</erSem>
   <exportName>myroot</exportName>
-  <exportType>1</exportType>
+  <exportType>2</exportType>
   <GDs>100</GDs>
   <IPD>1.6761</IPD>
   <LDC>1000</LDC>
@@ -23,7 +23,7 @@
   <RDM>0.1874</RDM>
   <SGC>0</SGC>
   <sim_length>20</sim_length>
-  <simtime>50</simtime>
+  <simtime>30</simtime>
   <TMD>0.1</TMD>
   <TrInt>0.002</TrInt>
   <TrT>1</TrT>
