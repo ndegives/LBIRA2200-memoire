@@ -23,7 +23,7 @@
   <RDM>0.1874</RDM>
   <SGC>0</SGC>
   <sim_length>20</sim_length>
-  <simtime>20</simtime>
+  <simtime>50</simtime>
   <TMD>0.1</TMD>
   <TrInt>0.002</TrInt>
   <TrT>1</TrT>
