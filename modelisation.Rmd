@@ -35,7 +35,7 @@ source("ArchiSimple/src/io_archisimple.R")
 # Fonction pour run le modèle
 
 ```{r, echo=TRUE}
-ArchiSimple <- function(par) {
+ArchiSimple <- function(par,exporttype,time) {
   setwd("ArchiSimple/src/archisimple93/")
   inc <-0
   for (variety in par$exportName) {
@@ -47,7 +47,9 @@ ArchiSimple <- function(par) {
     #Update les paramètres
       ## Regarde chaque colone de params, si la même est dans par, il remplace la colonne de params par celle de par
     params <- params %>%
-      mutate(across(everything(), ~ ifelse(cur_column() %in% names(par), par[inc,][[cur_column()]],.)))
+      mutate(across(everything(), ~ ifelse(cur_column() %in% names(par), par[inc,][[cur_column()]],.))) %>%
+      mutate(exportType = exporttype) %>%
+      mutate(simtime=time)
     print(params)
     # Créaction du fichier paramètre lu par ArchiSimple
     write_archisimple_XML(params, path = "parameter.xml")
@@ -73,15 +75,14 @@ params <- read_archisimple_xml("base_parameter.xml")
 par_sorgho <- data.frame(
     exportName=c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga'),
     dmin=c(      0.1567  ,0.1567  ,0.1567   ,0.1567  ,0.1567  ,0.1297),
-    RDM = c(     0.1874  ,0.2022  ,0.228    ,0.17545 ,0.1745  ,0.1611),
-    exportType=rep(1,6)
+    RDM = c(     0.1874  ,0.2022  ,0.228    ,0.17545 ,0.1745  ,0.1611)
   )
 ```
 
 ## Run le modèle
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 25)
 ```
 
 ## Résultats de la modélisation
@@ -110,7 +111,7 @@ for (variety in levels(sims$sim)) {
       geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
       scale_color_gradient(low = "blue", high = "red") +
       coord_fixed()+
-      labs(title=variety)
+      labs(title=variety,col='Diamètre')
     )
 }
 ```
@@ -172,7 +173,7 @@ params_maize <- data.frame(
 ## Run le modèle
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize)
+ArchiSimple(par=params_maize, exporttype = 1)
 ```
 
 ## Résultats de la modélisation
