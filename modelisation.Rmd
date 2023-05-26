@@ -79,15 +79,13 @@ par_sorgho <- data.frame(
   )
 ```
 
-## Run le modèle
+## Run le modèle .txt
 
 ```{r, echo=TRUE}
 ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
 ```
 
-## Résultats de la modélisation
-
-### ExportType = 1 , .txt
+### Résultats de la modélisation
 
 ```{r, echo=TRUE}
 setwd("ArchiSimple/src/archisimple93/")
@@ -116,7 +114,13 @@ for (variety in levels(sims$sim)) {
 }
 ```
 
-### ExportType = 2 , .RSML
+## Run le modèle .RSML
+
+```{r, echo=TRUE}
+ArchiSimple(par=par_sorgho,exporttype = 2,time = 40)
+```
+
+### Résultats de la modélisation
 
 #### Plot en fonction de l'age
 
@@ -136,7 +140,7 @@ r <- archiDART::root(roots)
 
 # Maize
 
-##Paramètre
+## Choix des valeurs de paramètre
 
 ```{r, echo=TRUE}
 params_maize <- data.frame(
@@ -170,15 +174,13 @@ params_maize <- data.frame(
 )
 ```
 
-## Run le modèle
+## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize, exporttype = 1)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
 ```
 
-## Résultats de la modélisation
-
-### ExportType = 1 , .txt
+### Résultats de la modélisation
 
 ```{r, echo=TRUE}
 setwd("ArchiSimple/src/archisimple93/")
@@ -199,9 +201,17 @@ maize %>%
       labs(title='Maize')
 ```
 
-### ExportType = 2 , .RSML
+### Plot en fonction de l'age
 
 Le plot et l'importation des données est déjà fait avant.
+
+```{r, echo=TRUE}
+ 
+```
+
+```{r, echo=TRUE}
+ 
+```
 
 ```{r, echo=TRUE}
  
