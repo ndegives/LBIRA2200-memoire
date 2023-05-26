@@ -2,9 +2,9 @@
 <Plant name="Sorgho" species="Amiggo">
   <ageAdv>15</ageAdv>
   <CVDD>0.2449</CVDD>
-  <dAdv>0.7</dAdv>
+  <dAdv>0.8</dAdv>
   <distAdv>30</distAdv>
-  <dmax>6.9845</dmax>
+  <dmax>6.984537</dmax>
   <dmin>0.1567</dmin>
   <dSem>0.1</dSem>
   <EL>33.0344</EL>

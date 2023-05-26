@@ -82,7 +82,7 @@ par_sorgho <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 30)
 ```
 
 ### Résultats de la modélisation
