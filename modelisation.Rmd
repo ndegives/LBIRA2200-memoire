@@ -24,6 +24,10 @@ editor_options:
   chunk_output_type: console
 ---
 
+Pour installe ArchiSimple :   
+g++ *.cpp external/tinyxml2/tinyxml2.cpp -std=c++11 -o archisimple.exe (dans le terminal au directory ArchiSimple93)  
+archisimple.exe
+
 ```{r setup, include=FALSE}
 rm(list = ls())
 library(tidyverse)
@@ -82,7 +86,7 @@ par_sorgho <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 1,time = 30)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 50)
 ```
 
 ### Résultats de la modélisation
@@ -146,9 +150,9 @@ r <- archiDART::root(roots)
 params_maize <- data.frame(
   ageAdv = 7,
   CVDD = 0.3,
-  dAdv = 1,
+  dAdv = 0.5,
   distAdv = 20,
-  dmax = 4,
+  dmax = 2,
   dmin = 0.14,
   dSem = 0.2,
   EL =  51,
@@ -167,7 +171,7 @@ params_maize <- data.frame(
   RDM =  0.12,
   SGC =  0,
   sim_length = 20,
-  simtime =  20,
+  simtime =  30,
   TMD =  0.08,
   TrInt = 0.01,
   TrT = 1 
@@ -177,7 +181,7 @@ params_maize <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize,exporttype = 1,time = 30)
+ArchiSimple(par=params_maize,exporttype = 1,time = 50)
 ```
 
 ### Résultats de la modélisation

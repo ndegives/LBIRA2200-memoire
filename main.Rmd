@@ -481,6 +481,26 @@ pander(maxAdv %>%
   select('plant','number'))
 ```
 
+## dADV
+
+```{r, echo=TRUE}
+paste('La moyenne des diamètres de racines nodales pour les six variétés est de',
+      mean(nodal_clean$diameter*10),
+      '[mm]')
+paste('dAdv = 2.3795/dMax =',
+      mean(nodal_clean$diameter*10)/Dmax)
+```
+
+## dSem
+
+```{r, echo=TRUE}
+paste('La moyenne des diamètres de racines primaire pour les six variétés est de',
+      mean(primary$diameter*10),
+      '[mm]')
+paste('dSem = 0.5648/dMax =',
+      mean(primary$diameter*10)/Dmax)
+```
+
 # Annexe
 
 ## Nombre de racine nodale par noeud
