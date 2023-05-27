@@ -86,7 +86,7 @@ par_sorgho <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 1,time = 50)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
 ```
 
 ### Résultats de la modélisation
@@ -118,30 +118,6 @@ for (variety in levels(sims$sim)) {
 }
 ```
 
-## Run le modèle .RSML
-
-```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 2,time = 30)
-```
-
-### Résultats de la modélisation
-
-#### Plot en fonction de l'age
-
-```{r, echo=TRUE}
-archiDART::archidraw(inputrsml = 'ArchiSimple/src/archisimple93/', rsml.date="age", coldate=rainbow(15), lwd=2, twod=c("x", "y"), asp=1, las=1, bty="l")
-
-```
-
-#### Chiffre
-
-La fonction archiDART::root donne les attributs de chaque racine.
-
-```{r eval=FALSE, include=FALSE}
-roots <- archiDART::rsmlToTable('ArchiSimple/src/archisimple93/')
-r <- archiDART::root(roots)
-```
-
 # Maize
 
 ## Choix des valeurs de paramètre
@@ -152,9 +128,9 @@ params_maize <- data.frame(
   CVDD = 0.3,
   dAdv = 0.5,
   distAdv = 20,
-  dmax = 2,
+  dmax = 4,
   dmin = 0.14,
-  dSem = 0.2,
+  dSem = 0.02667,
   EL =  51,
   erAdv = 0.8,
   erSem =  0.5,
@@ -164,7 +140,7 @@ params_maize <- data.frame(
   IPD =  2,
   LDC =  3000,
   maxAdv = 40,
-  maxSem =  5,
+  maxSem =  7,
   pdmax =  0.8,
   pdmin =  0,
   PDT = 4.5,
@@ -181,7 +157,7 @@ params_maize <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize,exporttype = 1,time = 50)
+ArchiSimple(par=params_maize,exporttype = 1,time = 40)
 ```
 
 ### Résultats de la modélisation
@@ -209,9 +185,36 @@ maize %>%
 
 Le plot et l'importation des données est déjà fait avant.
 
+# Run les modèle .RSML
 
-# Generic monocot
-## Choix des valeurs de paramètre
+```{r, echo=TRUE}
+ArchiSimple(par=par_sorgho,exporttype = 2,time = 40)
+ArchiSimple(par=params_maize,exporttype = 2,time = 40)
+```
+
+## Résultats de la modélisation
+
+### Plot en fonction de l'age
+
+```{r, echo=TRUE}
+archiDART::archidraw(inputrsml = 'ArchiSimple/src/archisimple93/', rsml.date="age", coldate=rainbow(15), lwd=2, twod=c("x", "y"), asp=1, las=1, bty="l")
+
+```
+
+### Chiffre
+
+La fonction archiDART::root donne les attributs de chaque racine.
+
+```{r eval=FALSE, include=FALSE}
+roots <- archiDART::rsmlToTable('ArchiSimple/src/archisimple93/')
+r <- archiDART::root(roots)
+```
+
+# Annexe
+
+## Generic monocot
+
+### Choix des valeurs de paramètre
 
 ```{r, echo=TRUE}
 params_mono <- data.frame(
@@ -245,13 +248,13 @@ params_mono <- data.frame(
 )
 ```
 
-## Run le modèle .txt
+### Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_mono,exporttype = 1,time = 30)
+ArchiSimple(par=params_mono,exporttype = 1,time = 40)
 ```
 
-### Résultats de la modélisation
+#### Résultats de la modélisation
 
 ```{r, echo=TRUE}
 setwd("ArchiSimple/src/archisimple93/")
@@ -260,7 +263,7 @@ mono <- fread('mono.txt') %>%
 setwd("../../../") 
 ```
 
-#### Plot en fonction du diamètre
+##### Plot en fonction du diamètre
 
 ```{r, echo=TRUE}
 mono %>%
@@ -270,8 +273,4 @@ mono %>%
       scale_color_gradient(low = "blue", high = "red") +
       coord_fixed()+
       labs(title='Generic Monocot')
-```
-
-```{r, echo=TRUE}
- 
 ```
