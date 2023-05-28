@@ -464,7 +464,7 @@ primary %>%
 ### Modèle
 
 ```{r, echo=TRUE}
-mod_EL <- lm(growth~diameter, data=primary)
+mod_EL <- lm(growth~diameter,data=primary)
 pander(summary(mod_EL))
 par(mfrow=c(2,2))
 plot(mod_EL)
