@@ -132,7 +132,7 @@ params_maize <- data.frame(
   distAdv = 20,
   dmax = 4.5,
   dmin = 0.14,
-  dSem = 0.02667,
+  dSem = 0.1, #0.02667,si pas ouf
   EL =  32.5, #51,
   erAdv = 0.8,
   erSem =  0.5,
