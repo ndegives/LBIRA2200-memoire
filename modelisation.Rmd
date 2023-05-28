@@ -128,9 +128,9 @@ for (variety in levels(sims$sim)) {
 params_maize <- data.frame(
   ageAdv = 7,
   CVDD = 0.3,
-  dAdv = 0.5,
+  dAdv = 0.3900776,
   distAdv = 20,
-  dmax = 4,
+  dmax = 4.5,
   dmin = 0.14,
   dSem = 0.02667,
   EL =  32.5, #51,
@@ -200,7 +200,7 @@ ArchiSimple(par=params_maize,exporttype = 2,time = 40)
 
 ### Plot en fonction de l'age
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 archiDART::archidraw(inputrsml = 'ArchiSimple/src/archisimple93/', rsml.date="age", coldate=rainbow(15), lwd=2, twod=c("x", "y"), asp=1, las=1, bty="l")
 
 ```
