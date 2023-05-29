@@ -1,5 +1,5 @@
 ---
-title: "Titre"
+title: "Mémoire - Aerials data CIPF"
 author: "Degives Nicolas"
 date: "Date"
 output:
@@ -112,14 +112,21 @@ ggplot(data=subset(data,annee==2021),aes(x=`%MS`,y=rendement_MS, color=variete))
 
 # Observation des rendements en fonction de l'année et de la variétée
 
+## Plot
+
 ```{r, echo=TRUE}
 # Plot général
 ggplot(data,aes(x=annee,y=rendement_MS, color=variete)) + geom_point(alpha = 0.8, size=3) + 
-               labs(color = "Variety", 
-                    x= "Year",
-                    y= "Dry matter yield [t/ha]",
-                    title="Yield by year and variety")
+               labs(color = "Variété", 
+                    x= "Année",
+                    y= "Rendement en MS [t/ha]",
+                    title="Rendement en fonctio de l'année et de la variété")+
+  theme_gray()
+```
 
+## ANOVA 2 non balancé
+
+```{r, echo=TRUE}
 mod <- lm(data=data, rendement_MS~annee+variete)
 pander(summary(mod))
 pander(anova(mod))
