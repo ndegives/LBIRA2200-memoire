@@ -117,6 +117,7 @@ for (variety in levels(sims$sim)) {
     )
   print(paste('La profondeur max du système racinaire=',max(subset(sims,sim==variety)$Z1),'[mm]'))
   print(paste0('Le système racinaire s étend de',min(subset(sims,sim==variety)$X1),'[mm] à ',max(subset(sims,sim==variety)$X1),'[mm] soit une largeur totale de :', max(subset(sims,sim==variety)$X1)-min(subset(sims,sim==variety)$X1),'[mm]'))
+  print(paste('Le diamètre moyen des racines est =',mean(subset(sims, sim==variety)$Diam)))
 }
 ```
 
@@ -183,6 +184,7 @@ maize %>%
       labs(title='Maize')
 print(paste('La profondeur max du système racinaire=',max(maize$Z1),'[mm]'))
 print(paste0('Le système racinaire s étend de',min(maize$X1),'[mm] à ',max(maize$X1),'[mm] soit une largeur totale de :', max(maize$X1)-min(maize$X1),'[mm]'))
+print(paste('Le diamètre moyen des racines est =',mean(maize$Diam)))
 ```
 
 ### Plot en fonction de l'age
