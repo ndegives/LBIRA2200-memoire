@@ -33,6 +33,7 @@ library(knitr)
 library(htmltools)
 library(lme4)
 library(lmerTest)
+library(emmeans)
 ```
 
 # Load and prepare the Data
@@ -80,17 +81,20 @@ ggplot(data = meteo, aes(x=Mois))+
   labs(title='Temperature')
 
 #Diagramme ombrothermique
-Mois = c('06/20','07/20','08/20','09/20','10/20',
-         '06/21','07/21','08/21','09/21','10/21',
-         '05/22','06/22','07/22','08/22','09/22')
+Mois = c('06','07','08','09','10',
+         '06','07','08','09','10',
+         '05','06','07','08','09')
 plot.new()
 par(mar=c(4,4,3,4))
-position=barplot(meteo$mean_rain,col='blue',names.arg = Mois,axes=F,ylab="",xlab="",main="Precipitation et température",ylim=c(0,200))
+position=barplot(meteo$mean_rain,col='blue',names.arg = Mois,srt=45,axes=F,ylab="",xlab="",main="Diagramme ombrothermique",ylim=c(0,200))
 axis(2,col="black",at=seq(0, 200, by=50))
 par(new=TRUE,mar=c(4,4,3,4))
 maximal = max(position)+(position[2]-position[1])
 plot(position,meteo$mean_temp,col="red",type="o",lwd=2,pch=16,axes=F,ylab="",xlab="",ylim=c(0,25))
 axis(4,col.axis='red',col='red')
+abline(v=c(0.5,6.27,11.95), col=c("black"), lty=c(3), lwd=c(2))
+text(x=c(1.2,6.97,12.65),y=c(25),label=c('2020','2021','2022'))
+legend("topright",legend = c("Température [°C]","Précipitation [mm]"),col=c('red','blue'), pch = c(16,15),cex = 0.7)
 box();grid()
 
 ```
@@ -115,40 +119,13 @@ ggplot(data,aes(x=annee,y=rendement_MS, color=variete)) + geom_point(alpha = 0.8
                     x= "Year",
                     y= "Dry matter yield [t/ha]",
                     title="Yield by year and variety")
-# Barplot séparé par année
-ggplot(data=data,aes(x=variete,y=rendement_MS))+
-  geom_bar(stat = 'identity',aes(fill=variete))+
-  facet_wrap(~annee)+
-  theme(axis.text.x=element_blank())+
-  labs(x='',
-       y='rendement [T/ha]',
-       title='Barplot séparé par année')
 
-# Barplot séparé par variété
-ggplot(data=data,aes(x=as.factor(annee),y=rendement_MS))+
-  geom_bar(stat='identity')+ 
-  facet_wrap(~variete)+
-  labs(x='annee',
-       y='rendement',
-       title = 'Barplot séparé par variété')
+mod <- lm(data=data, rendement_MS~annee+variete)
+pander(summary(mod))
+pander(anova(mod))
+emmeans(mod,pairwise~variete)
+plot(emmeans(mod,pairwise~variete))
 ```
-
-# Variabilité des rendements annuel
-
-```{r, echo=TRUE}
-# Box plot
-ggplot(data=data,aes(x=annee,y=rendement_MS))+
-  geom_boxplot()+
-  labs(x='Année',
-       y='rendement [T/ha]')
-
-# Test
-mod <- lm(data=data, rendement_MS~annee)
-summary(mod)
-anova(mod)
-```
-
-On observe que l'année n'est pas un facteur significatifs donc peut d'impact météo sur les rendements moyens de sorgho.
 
 # Variabilité des rendements entre variétée
 
@@ -167,25 +144,11 @@ anova(mod)
 
 On observe que la variété est un facteur significatifs.
 
-# Variabilité des rendements avec annee et variete en facteur fixe
+# Variabilité des rendements avec annee et variete 
 
 ```{r, echo=TRUE}
-# Test
-mod <- lm(data=data, rendement_MS~annee+variete)
-summary(mod)
-anova(mod)
+
 ```
-
-
-# Variabilité des rendements avec variete en facteur fixe et annee en facteur aléatoire
-
-```{r, echo=TRUE}
-mod <- lmer(data=data,formula = rendement_MS~variete+(1|annee))
-summary(mod)
-anova(mod)
-ranova(mod)
-```
-
 
 
 ```{r, echo=TRUE}
