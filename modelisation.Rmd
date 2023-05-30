@@ -77,7 +77,7 @@ time_plot <- function(data, variety) {
     print(i)
     print(paste('Plot pour',variety,'jour',i*5))
     print(
-      filter(sims,sim==variety, Jour <= i*5) %>%
+      filter(data,sim==variety, Jour <= i*5) %>%
         ggplot() +
         theme_classic() +
         geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
