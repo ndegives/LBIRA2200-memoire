@@ -32,11 +32,14 @@ archisimple.exe
 rm(list = ls())
 library(tidyverse)
 library(data.table)
+library(viridis)
 setwd("C:/Nico/Github/Memoire")
 source("ArchiSimple/src/io_archisimple.R")
 ```
 
 # Fonction pour run le modèle
+
+## Run archisimple
 
 ```{r, echo=TRUE}
 ArchiSimple <- function(par,exporttype,time) {
@@ -65,6 +68,29 @@ ArchiSimple <- function(par,exporttype,time) {
 }
 ```
 
+## Plot tout les 5 jours
+
+```{r, echo=TRUE}
+# Fonction qui fait un plot pour chaque jour jusqu'à jour max
+time_plot <- function(data, variety) {
+  for (i in 1:8) {
+    print(i)
+    print(paste('Plot pour',variety,'jour',i*5))
+    print(
+      filter(sims,sim==variety, Jour <= i*5) %>%
+        ggplot() +
+        theme_classic() +
+        geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
+        scale_x_continuous(limits=c(-500,+500)) +
+        scale_y_continuous(limits = c(-2000, 0)) +
+        scale_color_viridis(limits=c(0,2.5),option = "turbo") +
+        coord_fixed()+
+        labs(title=paste(variety,'jour',i*5),col='Diamètre')
+    )
+  }
+  }
+```
+
 # Sorgho
 
 ## Choix des valeurs de paramètres
@@ -89,7 +115,7 @@ par_sorgho <- data.frame(
 ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
 ```
 
-### Résultats de la modélisation
+## Résultats de la modélisation
 
 ```{r, echo=TRUE}
 setwd("ArchiSimple/src/archisimple93/")
@@ -102,22 +128,15 @@ for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
 setwd("../../../") 
 ```
 
-#### Plot en fonction du diamètre
+### Plot
 
 ```{r, echo=TRUE}
 for (variety in levels(sims$sim)) {
-  print(
-    subset(sims,sim==variety) %>%
-      ggplot() +
-      theme_classic() +
-      geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
-      scale_color_gradient(low = "blue", high = "red") +
-      coord_fixed()+
-      labs(title=variety,col='Diamètre')
-    )
-  print(paste('La profondeur max du système racinaire=',max(subset(sims,sim==variety)$Z1),'[mm]'))
-  print(paste0('Le système racinaire s étend de',min(subset(sims,sim==variety)$X1),'[mm] à ',max(subset(sims,sim==variety)$X1),'[mm] soit une largeur totale de :', max(subset(sims,sim==variety)$X1)-min(subset(sims,sim==variety)$X1),'[mm]'))
-  print(paste('Le diamètre moyen des racines est =',mean(subset(sims, sim==variety)$Diam)))
+  time_plot(sims,variety = variety)
+  print(paste('La profondeur max du système racinaire après 40 jours=',max(subset(sims,sim==variety)$Z1),'[mm]'))
+  print(paste0('Le système racinaire après 40 jours s étend de',min(subset(sims,sim==variety)$X1),'[mm] à ',max(subset(sims,sim==variety)$X1),'[mm] soit une largeur totale de :',
+               max(subset(sims,sim==variety)$X1)-min(subset(sims,sim==variety)$X1),'[mm]'))
+  print(paste('Le diamètre moyen des racines après 40 jours est =',mean(subset(sims, sim==variety)$Diam)))
 }
 ```
 
@@ -163,7 +182,7 @@ params_maize <- data.frame(
 ArchiSimple(par=params_maize,exporttype = 1,time = 40)
 ```
 
-### Résultats de la modélisation
+## Résultats de la modélisation
 
 ```{r, echo=TRUE}
 setwd("ArchiSimple/src/archisimple93/")
@@ -172,28 +191,18 @@ maize <- fread('maize.txt') %>%
 setwd("../../../") 
 ```
 
-#### Plot en fonction du diamètre
+### Plot
 
 ```{r, echo=TRUE}
-maize %>%
-      ggplot() +
-      theme_classic() +
-      geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
-      scale_color_gradient(low = "blue", high = "red") +
-      coord_fixed()+
-      labs(title='Maize')
+time_plot(data = maize,variety = 'maize')
 print(paste('La profondeur max du système racinaire=',max(maize$Z1),'[mm]'))
 print(paste0('Le système racinaire s étend de',min(maize$X1),'[mm] à ',max(maize$X1),'[mm] soit une largeur totale de :', max(maize$X1)-min(maize$X1),'[mm]'))
 print(paste('Le diamètre moyen des racines est =',mean(maize$Diam)))
 ```
 
-### Plot en fonction de l'age
-
-Le plot et l'importation des données est déjà fait avant.
-
 # Run les modèle .RSML sorgho et maïs
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 ArchiSimple(par=par_sorgho,exporttype = 2,time = 40)
 ArchiSimple(par=params_maize,exporttype = 2,time = 40)
 ```
@@ -222,7 +231,7 @@ r <- archiDART::root(roots)
 
 ### Choix des valeurs de paramètre
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 params_mono <- data.frame(
   ageAdv = 100,
   CVDD = 0.22,
@@ -256,13 +265,13 @@ params_mono <- data.frame(
 
 ### Run le modèle .txt
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 ArchiSimple(par=params_mono,exporttype = 1,time = 40)
 ```
 
 #### Résultats de la modélisation
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 setwd("ArchiSimple/src/archisimple93/")
 mono <- fread('mono.txt') %>%
   mutate(sim='mono')
@@ -271,12 +280,12 @@ setwd("../../../")
 
 ##### Plot en fonction du diamètre
 
-```{r, echo=TRUE}
+```{r eval=FALSE, include=FALSE}
 mono %>%
       ggplot() +
       theme_classic() +
       geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
-      scale_color_gradient(low = "blue", high = "red") +
+      scale_color_viridis(limits=c(0,2.5),option = "turbo") +
       coord_fixed()+
       labs(title='Generic Monocot')
 ```
