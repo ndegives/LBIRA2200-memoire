@@ -112,7 +112,7 @@ par_sorgho <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 60)
 ```
 
 ## Résultats de la modélisation
@@ -179,7 +179,7 @@ params_maize <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize,exporttype = 1,time = 40)
+ArchiSimple(par=params_maize,exporttype = 1,time = 60)
 ```
 
 ## Résultats de la modélisation
