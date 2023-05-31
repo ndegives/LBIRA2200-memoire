@@ -73,11 +73,11 @@ ArchiSimple <- function(par,exporttype,time) {
 ```{r, echo=TRUE}
 # Fonction qui fait un plot pour chaque jour jusqu'à jour max
 time_plot <- function(data, variety) {
-  for (i in 1:5) {
+  for (i in 1:8) {
     print(i)
-    print(paste('Plot pour',variety,'jour',i*12))
+    print(paste('Plot pour',variety,'jour',i*5))
     print(
-      filter(data,sim==variety, Jour <= i*12) %>%
+      filter(data,sim==variety, Jour <= i*5) %>%
         ggplot() +
         theme_classic() +
         geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
@@ -85,7 +85,7 @@ time_plot <- function(data, variety) {
         scale_y_continuous(limits = c(-2000, 0)) +
         scale_color_viridis(limits=c(0,2.5),option = "turbo") +
         coord_fixed()+
-        labs(title=paste(variety,'jour',i*12),col='Diamètre')
+        labs(title=paste(variety,'jour',i*5),col='Diamètre')
     )
   }
   }
@@ -112,7 +112,7 @@ par_sorgho <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=par_sorgho,exporttype = 1,time = 60)
+ArchiSimple(par=par_sorgho,exporttype = 1,time = 40)
 ```
 
 ## Résultats de la modélisation
@@ -179,7 +179,7 @@ params_maize <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize,exporttype = 1,time = 60)
+ArchiSimple(par=params_maize,exporttype = 1,time = 40)
 ```
 
 ## Résultats de la modélisation
