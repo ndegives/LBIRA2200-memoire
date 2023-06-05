@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\input{Packages}
+
+\begin{document}
+
+\input{Titlepage}
+\newpage
+\thispagestyle{empty} % Supprime les numéros de page et l'en-tête de cette page
+\mbox{} % Ajoute un espace vide pour remplir la page blanche
+\newpage
+
+\input{Content/0-Acknowledgements}
+\newpage
+\thispagestyle{empty} % Supprime les numéros de page et l'en-tête de cette page
+\mbox{} % Ajoute un espace vide pour remplir la page blanche
+\newpage
+
+\pagenumbering{Alph}
+\input{Content/1-TableOfContents.tex} 
+\newpage
+\thispagestyle{empty} % Supprime les numéros de page et l'en-tête de cette page
+\mbox{} % Ajoute un espace vide pour remplir la page blanche
+\newpage
+
+\pagenumbering{arabic}
+\input{Content/2-Introduction.tex}
+\newpage
+
+\input{Content/3-Context.tex}
+\newpage
+
+\input{Content/4-Objectives.tex}
+\newpage
+
+\input{Content/5-Methodology.tex}
+\newpage
+
+\input{Content/6-Results.tex}
+\newpage
+
+\input{Content/7-Discussion.tex}
+\newpage
+
+\input{Content/8-Conclusion.tex} 
+\newpage
+\thispagestyle{empty} % Supprime les numéros de page et l'en-tête de cette page
+\mbox{} % Ajoute un espace vide pour remplir la page blanche
+\newpage
+
+\printbibliography
+\newpage
+
+% Pour commencer les annexes
+\appendix
+\pagenumbering{Roman}
+
+\input{Annexes.tex}
+
+\end{document}
