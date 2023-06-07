@@ -542,9 +542,9 @@ for (i in 1:5){
 }
 
 node_diameter %>%
-  ggplot(aes(x=node,y=diameter,color=variety)) +
+  ggplot(data=.,aes(x=node,y=diameter,color=variety)) +
   geom_point()+
-  geom_smooth(method = 'lm',se=FALSE) +
+  geom_smooth(method = 'lm',formula = y~x-1,se=FALSE) +
   labs(title = 'diamètre en fonction du noeuds et de la variété',x='noeud',y='diamètre [mm]')+
   theme_gray()
 
