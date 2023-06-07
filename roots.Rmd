@@ -69,10 +69,10 @@ end.global provient du batch 'global root data' exporté de smartroot sur les é
 aerial <- read_excel("Aerials data/Sorgho20_21_22_CIPF.xlsx")
 early.global <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early global.csv")
 early.growth <- read.csv("C:/Nico/Github/Memoire/Early_growth_root_data/early growth.csv")
-node <- read_excel("End_growth_root_data/root_data/0.global_root_data/node.xlsx")
+node <- read_excel("End_growth_root_data/0.global_root_data/node.xlsx")
 end.global <- data.frame()
 for (variete in c("Amiggo","Biggben","Hyperion","Juno","Swingg","Vegga")) {
-  paste0("C:/Nico/Github/Memoire/End_growth_root_data/root_data/0.global_root_data/",variete,".csv") %>%
+  paste0("C:/Nico/Github/Memoire/End_growth_root_data/0.global_root_data/",variete,".csv") %>%
     read.csv() %>%
     mutate(variety = factor(variete)) %>%
     rbind(end.global,.) -> end.global
@@ -520,6 +520,26 @@ pander(left_join(
   node %>% group_by(variety, node) %>% summarize(mean = mean(number)),
   node %>% group_by(variety, node) %>% summarize(sd = sd(number))
 ))
+```
+
+## Diamètre moyen par noeuds
+
+```{r, echo=TRUE}
+node_diameter <- NULL
+for (i in 1:5){
+  end.data %>%
+    select(root_name,diameter,root_ontology,variety) %>%
+    filter(root_ontology==' Root') %>%
+    filter(grepl(paste0('_',i,'_'),root_name)) %>%
+    mutate(node=i) %>%
+    rbind(node_diameter,.) -> node_diameter
+}
+
+node_diameter %>%
+  ggplot(aes(x=node,y=diameter,color=variety)) +
+  geom_point()+
+  geom_smooth(method = 'lm') +
+  labs(title = 'diamètre en fonction du noeuds et de la variété',x='noeuds',y='diamètre')
 ```
 
 ## Boxplot ration parent/fille
