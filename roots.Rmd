@@ -522,7 +522,7 @@ pander(left_join(
 ))
 ```
 
-## Diamètre moyen par noeuds
+## Diamètre par noeud
 
 ```{r, echo=TRUE}
 node_diameter <- NULL
@@ -531,15 +531,25 @@ for (i in 1:5){
     select(root_name,diameter,root_ontology,variety) %>%
     filter(root_ontology==' Root') %>%
     filter(grepl(paste0('_',i,'_'),root_name)) %>%
-    mutate(node=i) %>%
+    mutate(node =
+             if (i==1){5}
+           else if (i==2) {4}
+           else if (i==3) {3}
+           else if (i==4) {2}
+           else if (i==5) {1}) %>%
+    mutate(diameter=diameter*10) %>%
     rbind(node_diameter,.) -> node_diameter
 }
 
 node_diameter %>%
   ggplot(aes(x=node,y=diameter,color=variety)) +
   geom_point()+
-  geom_smooth(method = 'lm') +
-  labs(title = 'diamètre en fonction du noeuds et de la variété',x='noeuds',y='diamètre')
+  geom_smooth(method = 'lm',se=FALSE) +
+  labs(title = 'diamètre en fonction du noeuds et de la variété',x='noeud',y='diamètre [mm]')+
+  theme_gray()
+
+mod_node <- lm(diameter ~ node-1, data=node_diameter)
+summary(mod_node)
 ```
 
 ## Boxplot ration parent/fille
