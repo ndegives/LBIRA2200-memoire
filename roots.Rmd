@@ -549,7 +549,7 @@ node_diameter %>%
   theme_gray()
 
 mod_node <- lm(diameter ~ node-1, data=node_diameter)
-summary(mod_node)
+pander(summary(mod_node))
 ```
 
 ## Boxplot ration parent/fille
