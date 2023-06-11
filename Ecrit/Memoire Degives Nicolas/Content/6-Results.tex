@@ -53,7 +53,7 @@ La figure \ref{fig:boxplot Dmin} représente les distributions de la latérale l
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{Image/boxplot Dmin.png}
-\caption{Box-plot de la latérale la plus fine pour chaque racine nodale en fonction de la variété}
+\caption{Box-plots de la latérale la plus fine pour chaque racine nodale en fonction de la variété}
 \label{fig:boxplot Dmin}
 \end{figure}
 
@@ -93,7 +93,7 @@ Les distributions des diamètres de racines nodales en fonction de la variété 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{Image/boxplot Dmax.png}
-\caption{Box-plot des diamètres de racines nodales en fonction de la variété}
+\caption{Box-plots des diamètres de racines nodales en fonction de la variété}
 \label{fig:boxplot Dmax}
 \end{figure}
 \newpage
@@ -103,7 +103,7 @@ Cet aperçu visuel est dans ce cas-ci confirmé par le test ANOVA (table \ref{ta
 
 \begin{table}[!ht]
     \centering
-    \caption{Anova du modèle pour estimer Dmax}
+    \caption{ANOVA du modèle pour estimer Dmax}
     \includegraphics[width=0.75\textwidth]{Image/anova Dmax.png}
     \label{tab:anova Dmax}
 \end{table}
@@ -121,7 +121,7 @@ Les hypothèses relatives à l'utilisation du modèle sont présentées en annex
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{Image/boxplot Drange.png}
-\caption{Box-plot de Drange en fonction de la variété}
+\caption{Box-plots de Drange en fonction de la variété}
 \label{fig:boxplot Drange}
 \end{figure}
 
@@ -153,7 +153,7 @@ Néanmoins, le test ANOVA (table \ref{tab:anova IBD}) n'indique pas de différen
 
 \begin{table}[ht]
     \centering
-    \caption{Anova du modèle pour estimer IBD}
+    \caption{ANOVA du modèle pour estimer IBD}
     \includegraphics[width=1\textwidth]{Image/anova IBD.png}
     \label{tab:anova IBD}
 \end{table}
@@ -182,13 +182,13 @@ La table ANOVA \ref{tab:anova DIDm} confirme que ces effets sont significatifs.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{Image/plot DIDm.png}
-\caption{Plot du diamètre des racines fille par rapport à leur racine mère en fonction de la variétés }
+\caption{Plot du diamètre des racines filles par rapport à leur racine mère en fonction de la variété}
 \label{fig:plot DIDm}
 \end{figure}
 
 \begin{table}[ht]
     \centering
-    \caption{Anova du modèle pour estimer DIDm}
+    \caption{ANOVA du modèle pour estimer DIDm}
     \includegraphics[width=1\textwidth]{Image/anova DIDm.png}
     \label{tab:anova DIDm}
 \end{table}
@@ -260,7 +260,7 @@ dSem est dès lors estimé par le ratio entre la moyenne des diamètres de racin
 L'estimation de dAdv est quant à elle faite sur base du ratio entre Dmax et la moyenne des diamètres de racines adventive observée, soit $dAdv = \frac{2.3795[mm]}{6.9845[mm]} = 0.3407$
 Les deux paramètres sont supposés égaux pour toutes les variétés dès lors qu'il a été observé que les distributions des diamètres de racines primaires et nodales ne pouvaient pas être considérées comme significativement différentes auparavant.
 
-\subsubsection{Tous les paramètres du modèle}
+\subsubsection{Tous les paramètres du modèle ArchiSimple}
 
 La table \ref{tab:esti.archisimple} reprend les estimations de tous les paramètres d'input du modèle.
 
@@ -271,7 +271,8 @@ La table \ref{tab:esti.archisimple} reprend les estimations de tous les paramèt
     \label{tab:esti.archisimple}
 \end{table}
 
-\subsection{Simulation d'architecture de système racinaire}
+\subsection{Simulation d'architecture de système racinaire avec ArchiSimple}
+
 La durée de simulation a été fixée jusqu'à la fin de la phase végétative, soit environ 40 jours.
 \cite{pellerinand_evaluation_1994} observaient que l'extension du système racinaire atteint un maximum quelques jours après la fin de la phase végétative chez le maïs.
 Les systèmes racinaires générés par ArchiSimple sont présentés dans la figure \ref{fig:roots} ci-dessous.
