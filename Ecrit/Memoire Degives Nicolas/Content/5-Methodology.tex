@@ -9,7 +9,7 @@ Ce choix confère plusieurs avantages :
     \item Premièrement, les résultats des précédentes cultures réalisées et analysées par le CIPF offrent des informations sur les parties aériennes des six variétés considérées sur au moins deux années consécutives.
     \item Ensuite, les cultures de 2022 ayant été récoltées en septembre, il a été possible de récupérer des échantillons racinaires de cette culture, offrant ainsi des échantillons de fin de culture.
 \end{itemize}
-Ces six génotypes étudiés sont repris dans le tableau \ref{tab:variete} ci-dessous ainsi que l'identifiant attribué à ces génotypes qui sera par la suite utilisé pour différencier les échantillons.
+Ces six génotypes étudiés sont repris dans la table \ref{tab:variete} ci-dessous ainsi que l'identifiant attribué à ces génotypes qui sera par la suite utilisé pour différencier les échantillons.
 
 \begin{table}[ht]
     \centering
@@ -72,7 +72,7 @@ Les racines de plants de début de culture ont été échantillonnés à l'aide 
 \newline
 
 \textbf{Rhizotron} \\
-Un rhizotron est un montage permettant d'observer le développement racinaire ainsi que la prise de mesure précise de l'architecture racinaire de façon non destructrice.
+Un rhizotron est un montage permettant d'observer le développement racinaire ainsi que la prise de mesures précises de l'architecture racinaire de façon non destructrice.
 Pratiquement, les rhizotrons ont été construits comme illustré par la figure \ref{fig:rhizotron}.
 Une planche en bois sur laquelle se trouve des mousses est remplie d'un substrat au choix.
 Une feuille de papier filtre laissant passer la solution nutritive est ensuite placée sur le substrat.
@@ -106,12 +106,12 @@ Le substrat qui est utilisé est de la perlite.
 Il s'agit d'un substrat de culture léger, avec une bonne rétention d'eau, ce qui peut favoriser une croissance saine des racines et des plantes.
 Chaque rhizotron a été arrosé les lundi, mercredi et vendredi durant toute la durée de l'expérience avec 50 ml de solution de Hoagland.
 La solution de Hoagland, dont la composition est reprise en annexe \ref{an:Hoagland}, contient tous les nutriments nécessaires au développement de la majorité des plantes.
-Cette fréquence d'arrosage vise à apporter une quantité suffisante d'eau et de nutriment pour permettre aux plantes de se développer sans être exposées à l'un ou l'autre stress.
+Cette fréquence d'arrosage vise à apporter une quantité suffisante d'eau et de nutriments pour permettre aux plantes de se développer sans être exposées à l'un ou l'autre stress.
 Un tracé de l'évolution des racines a été effectué de façon régulière afin de pouvoir mesurer des paramètres de croissance.
 L'un de ces tracés est disponible en annexe \ref{an:trace}.
 \newline
 
-Une première salve de rhizotron s'est avérée être inutilisable dû à la présence de pathogènes dans le dispositif expérimental.
+Une première salve de rhizotrons s'est avérée être inutilisable dû à la présence de pathogènes dans le dispositif expérimental.
 Ceux-ci ont été identifier comme étant des champignons (Stachybotrys echinata et Stachybotrys chartarum).
 Une seconde salve a donc été réalisée avec des précautions supplémentaires.
 Les échantillons utilisés dans ce travail ont, en conséquence, été traités avec un fongicide (Rovral) une première fois avant le montage des rhizotrons et deux fois supplémentaires au cours de la croissance des plants.
@@ -139,7 +139,7 @@ Toutes les mesures réalisées sur les échantillons racinaires ont été faites
 Smartroot est un logiciel d'analyse d'images basé sur ImageJ qui permet la quantification de la croissance et d'architecture racinaire complexe.
 Cette quantification se fait via le traçage d'image d'échantillon de système racinaire (figure \ref{fig:schema smartroot}).
 Les racines sont représentées par un ensemble de points (appelés nœuds) reliés entre eux.
-Le logiciel est par la suite capable, sur base des nœuds de fournir des mesures de l'architecture du système racinaire telles que la longueur, le diamètre, la densité de latérale, l'angle d'insertion des latérales, ...
+Le logiciel est par la suite capable, sur base des nœuds, de fournir des mesures de l'architecture du système racinaire telles que la longueur, le diamètre, la densité de latérale, l'angle d'insertion des latérales, ...
 \end{minipage} 
 \newline
 
@@ -160,7 +160,7 @@ Le langage XML est largement utilisé pour échanger des données entre des appl
 Il est également extensible, ce qui signifie que les développeurs peuvent définir leurs propres balises pour représenter des données spécifiques à leur application (dans le cas du RSML, des données racinaires).
 Une représentation visuelle de la structure d'un fichier RSML est disponible en annexe \ref{an:RSML}.
 Smartroot propose par ailleurs la possibilité d'extraire directement les données racinaires plus globales dans un fichier CSV (Comma Separated Values).
-Ce fichier contient alors entre autres la longueur, le diamètre moyen, l'angle d'insertion, la direction de chaque racine.
+Ce fichier contient alors entre autres la longueur, le diamètre moyen, l'angle d'insertion, la direction de chaque racine, ...
 Les analyses descriptives ainsi que l'inférence statistique seront dès lors réalisées sur base de ces fichiers.
 \newline
 
@@ -175,8 +175,8 @@ Les échantillons suivent les nomenclatures suivantes :
 
 \subsection{Modélisation de l'architecture racinaire}
 
-Suite à l'analyse des images provenant des différents échantillons racinaire, il est possible de travailler avec les données chiffrées qui en résultent.
-Dans un premier temps, une caractérisation sera faite afin d'identifier les valeurs de certain paramètre d'architecture racinaire propres au sorgho.
+Suite à l'analyse des images provenant des différents échantillons racinaires, il est possible de travailler avec les données chiffrées qui en résultent.
+Dans un premier temps, une caractérisation sera faite afin d'identifier les valeurs de certains paramètres d'architectures racinaires propres au sorgho.
 Ensuite, des paramètres seront introduits en input d'un modèle afin de reconstruire un système racinaire complet.
 
 \subsubsection{ArchiSimple}
@@ -188,11 +188,11 @@ Ces processus sont : l'émission de racines adventives, l'élongation de racines
 Chacun de ces processus est quantifié à l'aide des inputs qui sont requis par le modèle.
 \newline
 
-Une vingtaine d'inputs est nécessaire au modèle, ceux-ci sont repris dans le tableau \ref{tab:archisimple} ci-dessous.
-En fonction de l'input estimé et suite aux difficultés d'échantillonnage et d'analyse décrites précédemment, les données utilisées proviendront soit des racines en début de culture ('début' dans le tableau \ref{tab:archisimple}) soit en fin de culture ('fin' dans le tableau \ref{tab:archisimple}).
+Une vingtaine d'inputs est nécessaire au modèle, ceux-ci sont repris dans la table \ref{tab:archisimple} ci-dessous.
+En fonction de l'input estimé et suite aux difficultés d'échantillonnage et d'analyse décrites précédemment, les données utilisées proviendront soit des racines en début de culture ('début' dans la table \ref{tab:archisimple}) soit en fin de culture ('fin' dans la table \ref{tab:archisimple}).
 Enfin, certains paramètres n'ont pas pu être extraits des données récoltées.
 Quelques uns ont pu être quantifiés pour le sorgho sur base de sources bibliographiques.
-Les derniers paramètres, qui n'ont pas pu être quantifiés pour le sorgho, sont alors alignés sur base de paramètres génériques identifiés pour les monocotylédones par \cite{gerard_modelling_2017} et disponibles en annexe \ref{an:Poaceae} ('monocot' dans le tableau \ref{tab:archisimple}).
+Les derniers paramètres, qui n'ont pas pu être quantifiés pour le sorgho, sont alors alignés sur base de paramètres génériques identifiés pour les monocotylédones par \cite{gerard_modelling_2017} et disponibles en annexe \ref{an:Poaceae} ('monocot' dans la table \ref{tab:archisimple}).
 
 \newpage 
 
@@ -251,7 +251,7 @@ Les derniers paramètres, qui n'ont pas pu être quantifiés pour le sorgho, son
     La durée de croissance (Growth duration : GD) est lui-même également construit sur base du diamètre via l'équation :
     \begin{equation} GD=GD_s*D^2 \end{equation}
     $GD_s$ étant alors un paramètre de durée de croissance [$day*mm^{-2}$].
-    La trajectoire empruntée par les racines est calculée sur base de : la direction initiale, une perturbation aléatoire et le type et coefficient de tropisme (TrT et TrInt).
+    La trajectoire empruntée par les racines est calculée sur base de : la direction initiale, une perturbation aléatoire ainsi que le type et le coefficient d'intensité de tropisme (TrT et TrInt).
     Cela permet de simuler les contraintes mécaniques présentent dans le sol ainsi que le gravitropisme (influence verticale due à la gravité) ou le plagiotropisme (influence horizontale due à la répartition d'auxine suivant la gravité).
     \item \textbf{Ramification :} 
     Les ramifications sont générées de façon acropétale (de la base vers l'apex) et sont espacées de façon régulière sur base de la distance entre primordium (inter-primordium distance : IPD).
@@ -259,7 +259,8 @@ Les derniers paramètres, qui n'ont pas pu être quantifiés pour le sorgho, son
     \item \textbf{Croissance radiale :}
     L'estimation de celle-ci suit le raisonnement suivant :
     chaque racine contribue à la croissance radiale des racines auxquelles elle est connectée, en fonction de sa propre section transversale, dès qu'elle commence à s'allonger. 
-    Le coefficient de proportionnalité est le paramètre de modèle SGC, qui est proche de 1 pour plusieurs espèces.
+    Le paramètre de Archisimple SGC est un coefficient de proportionnalité permettant de nuancer ce processus.
+    SGC est estimé proche de 1 pour de multiples espèces \citep{pages_calibration_2014}.
     Dans le cas des monocotylédones comme le sorgho, ce paramètre est fixé à 0 étant donné que ces plantes ne présente pas de croissance radiale.
     \item \textbf{Sénescence et Abscission :}
     La sénescence d'une racine débute lorsque la durée après la fin de sa croissance dépasse son temps de vie (life duration : LD).
@@ -270,38 +271,38 @@ Les derniers paramètres, qui n'ont pas pu être quantifiés pour le sorgho, son
     \end{equation}
     ou $LDC$ et $RTD$ sont des paramètres du modèle.
     Une racine morte reste présente tant qu'une de ses latérales est encore vivante et ne se détache donc que lorsque toutes les latérales ont excédées leurs durées de vies.
-    Les différents facteurs environnementaux pouvant affect la durée de vie des racines ne sont dans ce cas pas pris en compte dans ce modèle.
+    Les différents facteurs environnementaux pouvant affecter la durée de vie des racines ne sont dans ce cas pas pris en compte dans ce modèle.
 \end{itemize}
 
-ArchiSimple se différencie fortement des autres modèles par la simplicité qu'il conserve.
+Archisimple se différencie fortement des autres modèles par la simplicité qu'il conserve.
 Les différents types racinaires sont volontairement ignorés dès lors que ceux-ci ne sont pas basés sur la physiologie des racines.
 À la place, le modèle se base sur des relations explicites telles que le paramètre qui met en relation le taux d'élongation potentiel avec le diamètre.
 Le diamètre racinaire occupe alors une place centrale dans ce modèle étant donné que seul le diamètre des méristèmes est utilisé pour décrire les capacités de développement propre à chaque racine.
 
 \subsubsection{Caractérisation de l'ASR, les principaux paramètres}
 
-Afin d'estimer les différents paramètres nécessaires en input de ArchiSimple, des statistiques descriptives ainsi que de l'inférence sont réalisées sur les données provenant des échantillons.
-Tous les traitements de données, tracés et analyses sont réalisées à l'aide du logiciel R (4.2.2).
-L'élimination d'outlier est réalisé à l'aide de la méthode IQR (interquartile range).
-Les modèles linéaires sont construits avec la fonction lm() et les analyse de variances avec la fonction anova() pour tester les effets des différentes variétés sur les traits architecturaux.
+Afin d'estimer les différents paramètres nécessaires en input de Archisimple, des statistiques descriptives ainsi que de l'inférence sont réalisées sur les données provenant des échantillons.
+Tous les traitements de données, tracés et analyses sont réalisés à l'aide du logiciel R (4.2.2).
+L'élimination d'outlier est réalisée à l'aide de la méthode IQR (interquartile range).
+Les modèles linéaires sont construits avec la fonction lm() et les analyses de variances avec la fonction anova() pour tester les effets des différentes variétés sur les traits architecturaux.
 Les variétés sont considérées comme facteur fixe et le niveau de confiance utilisé pour les tests statistiques est fixé à : $\alpha$ = 0.05.
 Les hypothèses sous-jacentes à l'utilisation d'un modèle ANOVA (normalité, indépendance et égalité des variances) sont vérifiées pour chacun des modèles utilisés.
 \newline
 
-\cite{pages_calibration_2014,wu_relationships_2016,pages_seeking_2018} ont proposé et étudiés un set de cinq paramètres qui permettent une bonne caractérisation de l'ASR.
-Ces cinq traits font partie ou découle des inputs de 'ArchiSimple' et ils offrent une vision assez complète de l'architecture racinaire.
+\cite{pages_calibration_2014,wu_relationships_2016,pages_seeking_2018} ont proposés et étudiés un set de cinq paramètres qui permettent une bonne caractérisation de l'ASR.
+Ces cinq traits font partie ou découlent des inputs de 'ArchiSimple' et ils offrent une vision assez complète de l'architecture racinaire.
 Ces cinq paramètres sont :
 \begin{itemize}
     \item \textbf{Le diamètre minimal, Dmin : } reflète la finesse des nombreuses racines fines qui ont une fonction purement absorbante \citep{pages_seeking_2018}.
     Développer des racines de fin diamètres est une stratégie permettant d'augmenter la surface d'échange sol-racines à un coût minimum.
     Afin d'estimer ce paramètre, le diamètre de la racine latérale la plus fine pour chaque racine nodale en fin de culture est récupérée.
-    L'estimation de Dmin est alors estimé sur base d'un modèle ANOVA réalisé sur les distributions de ces plus fins diamètres en fonction de la variété.
+    L'estimation de Dmin est alors réalisée sur base d'un modèle ANOVA sur les distributions de ces plus fins diamètres en fonction de la variété.
     \item \textbf{Le diamètre maximal, Dmax : } est souvent observé sur les racines les plus longues et offre différents avantages.
     Un plus grand diamètre est généralement corrélé avec une meilleure exploration des sols.
     Dmax correspond au maximum de la distribution des diamètres des racines nodales récupérées, pour chaque variété, sur les plants échantillonnés en fin de culture.
     \item \textbf{L'étendue des diamètres, Drange :} possède également un impact sur le volume de sol colonisé.
     En effet, \cite{pages_links_2011} a montré qu'une plus grande variabilité entre les diamètres extrêmes est positivement corrélée avec une plus grande portée des racines.
-    Drange est alors calculé sur base des diamètres extrêmes comme $2*(D_{max}-D_{min})/(D_{max}+D_{min})$ pour chaque racine nodales et ses latérales.
+    Drange est alors calculé sur base des diamètres extrêmes comme $2*(D_{max}-D_{min})/(D_{max}+D_{min})$ pour chaque racine nodales en fin de culture et ses latérales.
     \item \textbf{La distance entre latérale, IBD : } est l'inverse de la densité de latérales.
     Ce paramètre définit donc la densité des racines dans le sol et ainsi leur exploration du sol.
     IBD est mesuré à l'aide de la distance moyenne entre deux latérales voisines sur la même racine parente.
@@ -313,7 +314,8 @@ Ces cinq paramètres sont :
 \end{itemize}
 
 Ces traits permettent de capturer l'essentiel de la capacité d'un système racinaire à explorer et à exploiter les sols.
-Il a également été observé que ces traits sont majoritairement influencés par l'espèce de plante et en moindre mesure par l'environnement les rendant ainsi particulièrement adaptés pour établir les différences d'ASR entre différentes espèces voir variétés.
+Il a également été observé que ces traits sont majoritairement influencés par l'espèce de plante et en moindre mesure par l'environnement.
+Ce qui rend ces traits architecturaux particulièrement adaptés pour établir les différences d'ASR entre différentes espèces voir variétés.
 Ceux-ci bénéficieront donc, dans un premier temps, d'un développement statistique plus approfondi afin d'identifier des similitudes ou des différences entre les six variétés échantillonnées.
 \newline
 
@@ -322,4 +324,4 @@ Celui-ci correspond à la relation linéaire qu'il y a entre le diamètre d'une 
 L'estimation de celui-ci a donc un impact sur l'allure générale du système généré par ArchiSimple.
 Ce paramètre, avec le diamètre des racines primaires, sont les raisons qui ont nécessité de faire des tests en rhizotron afin de quantifier la croissance racinaire.
 EL est estimé comme la pente de la régression linéaire de la vitesse de croissance en fonction du diamètre.
-Le résultat obtenu sur les racines primaires sera ensuite généralisé à l'ensemble du système racinaire.
+Le résultat obtenu sur les racines primaires est ensuite généralisé à l'ensemble du système racinaire.

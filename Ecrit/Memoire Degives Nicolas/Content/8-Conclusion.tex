@@ -2,17 +2,17 @@
 
 Ce travail s'inscrit dans un grand travail de recherche sur les flux hydriques au sein des plantes.
 L'intérêt porté à ces flux n'est pas nouveau, mais il reste beaucoup de zones à éclaircir.
-Certains processus ont pas encore été suffisamment explorés.
+Certains processus n'ont pas encore été suffisamment explorés.
 Ces flux sont d'autant plus importants aujourd'hui au vu du tournant qu'a commencé à prendre la sélection végétale pour inclure la résilience des plantes pour considérer une culture.
 \newline
 
 La recherche sur les racines a connu un intérêt plus tardif que pour les parties aériennes de par la difficulté que représente l'échantillonnage de celles-ci.
-Beaucoup de processus majeurs sont désormais bien compris et décrits, mais le système racinaire et son influence sur les flux hydriques manque encore quelque peu de précision.
+Beaucoup de processus majeurs sont désormais bien compris et décrits, mais le système racinaire et son influence sur les flux hydriques manquent encore quelque peu de précision.
 Le système racinaire nécessite, non seulement de prendre en compte beaucoup d'aspects, mais également d'articuler tous ces éléments ensemble pour parvenir à un résultat final le plus précis possible.
 \newline
 
 Le sorgho, longtemps cultivé dans des régions semi-arides, pourrait s'imposer dans de nouvelles régions suite aux dérèglements climatiques.
-Cette céréale possède de nombreux atouts face aux maïs, notamment des besoins hydriques sensiblement plus faibles, et offre également une multitude de débouchés.
+Cette céréale possède de nombreux atouts face au maïs, notamment des besoins hydriques sensiblement plus faibles, et offre également une multitude de débouchés.
 Cette importante résilience hydrique représente un intérêt majeur face au dérèglement climatique et la question se pose de la contribution du système racinaire dans cette tolérance à la sécheresse.
 \newline
 
@@ -23,36 +23,36 @@ Afin de pouvoir observer au maximum les systèmes racinaires de ces variétés, 
 \newline
 
 La première étape a été de quantifier des caractéristiques racinaires dans les six variétés de sorgho.
-Cinq paramètres racinaires (Dmin, Dmax, Drange, DIDm et IBD) identifiés par \cite{pages_seeking_2018} comme capturant assez bien l'entièreté d'un système racinaire ont été retenus pour caractériser les variétés de sorgho observées.
+Cinq paramètres racinaires (Dmin, Dmax, Drange, DIDm et IBD) identifiés comme capturant assez bien l'entièreté d'un système racinaire ont été retenus pour caractériser les variétés de sorgho observées.
 Ces paramètres ont donc été quantifiés et les différences ou similitudes entre variétés ont été identifiées à l'aide de tests statistiques.
 Il en est sorti que les six variétés étaient, vis-à-vis de ces cinq paramètres, plutôt similaires.
 Seuls le Dmin de Vegga et les six DIDm se sont avérés être statistiquement différents parmi les variétés.
 \newline
 
-Le modèle utilisé dans ce travail pour modéliser l'architecture des systèmes racinaires est ArchiSimple.
+Le modèle utilisé dans ce travail pour modéliser l'architecture des systèmes racinaires est Archisimple.
 Ce modèle fonctionne sur base de cinq principaux processus : émission, élongation, ramification, croissance radiale et abscission.
 Pour fonctionner, ces processus utilisent une vingtaine de paramètres demandés en input du modèle.
-Le faible nombre d'inputs est un atout de ArchiSimple et est permis par le fait que l'intensité des processus est souvent basé sur les diamètres racinaires.
-Cette approche utilisant les diamètres est exclusive à ArchiSimple et assez intéressante dès lors que toutes les relations impliquant le diamètre dans le modèle ont été prouvés comme évoluant avec le diamètre.
+Le faible nombre d'inputs est un atout de Archisimple et est permis par le fait que l'intensité des processus est souvent basé sur les diamètres racinaires.
+Cette approche utilisant les diamètres est exclusive à Archisimple et est assez intéressante dès lors que toutes les relations impliquant le diamètre dans le modèle ont été observées comme évoluant avec le diamètre.
 \newline
 
-Les systèmes racinaires obtenus via ArchiSimple étaient assez semblables pour les six variétés.
+Les systèmes racinaires obtenus via Archisimple étaient assez semblables pour les six variétés.
 Ce résultat est cohérent au vu des faibles variations observées parmi les paramètres fournis en input du modèle.
 L'architecture racinaire du maïs a également été générée à l'aide du modèle afin de pouvoir comparer les résultats obtenus pour le sorgho à ceux du maïs.
 Il est alors apparu que les architectures générées pour le sorgho occupaient un plus grand volume de sol de par la longueur des racines latérales et les directions, moins verticales, dans lesquelles les racines adventives se développaient.
 Cela va dans le sens de nombreux articles indiquant que le sorgho jouit d'un système racinaire puissant qui couvre plus de volume de sol que le maïs avec des racines pouvant atteindre jusqu'à deux mètres de profondeur.
 \newline
 
-Il est apparu que, bien que les systèmes racinaires générés n'étaient pas démesurés, ArchiSimple manque de réalisme dans sa construction de système racinaire adventif.
-Les racines adventives, toutes émises avec le même diamètre, limitent la justesse que pourrait avoir ArchiSimple dans la modélisation de certains systèmes racinaires et particulièrement ceux du sorgho.
-Les racines adventives devraient observer une augmentation de diamètres au fur et à mesure de leurs apparitions et cela n'est pas pris en compte par ArchiSimple.
+Il est apparu que, bien que les systèmes racinaires générés n'étaient pas démesurés, Archisimple manque de réalisme dans sa construction de systèmes racinaires adventifs.
+Les racines adventives, toutes émises avec le même diamètre, limitent la justesse que pourrait avoir Archisimple dans la modélisation de certains systèmes racinaires et particulièrement ceux du sorgho.
+Les racines adventives devraient observer une augmentation de diamètre au fur et à mesure de leurs apparitions et cela n'est pas pris en compte par Archisimple.
 Les diamètres étant au centre de beaucoup de dynamiques dans le modèle, cela engendre différents problèmes dans les systèmes racinaires obtenus.
 Le paramètre EL, liant le diamètre à l'élongation racinaire, présente également le désavantage d'être constant alors qu'il a été montré que l'élongation racinaire n'est pas linéaire avec le diamètre et est sujette à une diminution avec le temps et la profondeur.
-ArchiSimple est donc, bien que très prometteur pour la modélisation d'architecture de système racinaire, parfois un peu lacunaire et mériterait certaines améliorations.
+Archisimple est donc, bien que très prometteur pour la modélisation d'architecture de système racinaire, parfois un peu lacunaire et mériterait certaines améliorations.
 \newline
 
 Finalement, le sorgho ne présente pas encore le profil d'un candidat aux grandes cultures belges.
-Les printemps peuvent encore être déficitaire en température pour cette culture et les rendements actuels égalent difficilement ceux de son homologue le maïs.
+Les printemps peuvent encore être déficitaire en températures pour cette culture et les rendements actuels égalent difficilement ceux de son homologue le maïs.
 Néanmoins, il convient de continuer à s'y intéresser tant comme sujet de recherche que comme alternative de culture pour le futur.
 Le sorgho représente aujourd'hui un exemple de résilience hydrique et identifier toutes ses particularités peut mener à l'amélioration d'autres cultures en leur inculquant les traits d'intérêts à la résistance aux stress hydriques.
 La sélection de sorgho est également encore sujette à de nombreuses avancées en termes de rendements puisque celle-ci est loin d'être aboutie pour nos régions.

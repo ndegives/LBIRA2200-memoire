@@ -51,7 +51,7 @@ Le résultat de cette modélisation est présenté en figure \ref{fig:roots_maiz
 
 Le système racinaire alors créé est moins étendu que ceux synthétisés pour le sorgho.
 Cette modélisation du maïs donne une profondeur maximale de 1.492 mètres, une largeur de 0.432 mètre et un diamètre moyen de 0.572 mm.
-Ces trois valeurs sont chacune plus faibles que celles observées lors des précédentes modélisations de sorgho.
+Ces trois valeurs sont chacune plus faibles que celles observées lors des précédentes modélisations pour le sorgho.
 La profondeur atteinte n'est que faiblement inférieure au sorgho, mais les systèmes racinaires produits pour le sorgho couvrent une plus grande distance horizontale.
 Cette différence vient, d'une part, par des racines adventives qui s'étendent de façon plus verticale chez le maïs et, d'autre part, par les racines latérales qui ont une croissance plus importante chez le sorgho.
 \newline
@@ -63,14 +63,14 @@ Le fait que cela ne soit pas observable peut, en partie être dû à l'estimatio
 \subsubsection{Validité des échantillons}
 
 Les mesures ayant servi pour estimer les différents paramètres de ArchiSimple proviennent de sources variées.
-Certaine sont faites sur des plants de sorgho de fin de culture en champ, d'autre en début de culture en rhizotron et d'autres encore proviennent de sources bibliographiques.
+Certaines sont faites sur des plants de sorgho de fin de culture en champ, d'autre en début de culture en rhizotron et d'autres encore proviennent de sources bibliographiques.
 Ces différentes sources vont de pair avec différentes conditions de cultures, différents matériels et différentes méthodes de mesures pouvant influencer les résultats. 
 Travailler avec le vivant implique constamment une partie stochastique dans les résultats dû aux éléments imprévisibles que conservent les plantes.
 Néanmoins, il est possible que les différentes mesures aient été influencées de façon significative par les conditions de culture des plants et les méthodes de mesure.
 Cette affirmation est d'autant plus adaptée dans le cadre de ce travail étant donnés que de nombreuses différences sont identifiables dans les conditions de cultures.
 En effet, plusieurs différences de traitements sont identifiables entre les échantillons de fin et de début de culture :
 \begin{itemize}
-    \item Les échantillons en champs ont été confrontés à la compétition, aux aléas climatiques, aux organismes des sols, ... alors que les plants en rhizotron sont maintenus en conditions contrôlées d'humidité, de températures et de lumière.
+    \item Les échantillons en champs ont été confrontés à la compétition, aux aléas climatiques, aux organismes des sols, ... alors que les plants en rhizotron sont maintenus en conditions contrôlées d'humidité, de température et de lumière.
     \item La présence de champignons au sein des dispositifs en début de culture et l'application du fongicide.
     \item Le milieu dans lequel évoluent les racines (perlite vs terre) et les contraintes physiques, biologiques et chimiques qui en découlent.
     \item La nutrition de la plante qui était contrôlée en début de culture et non en champs.
@@ -84,19 +84,19 @@ Les différents processus permettant de faire évoluer le modèle semblent captu
 Les inputs requis au fonctionnement du modèle représentent également un atout grâce à leur faible nombre et le fait que ces traits architecturaux sont, pour la plupart, relativement faciles à mesurer.
 Le fait de ne différencier les racines que par leur diamètre offre une certaine versatilité aux processus qui régissent le modèle, offrant ainsi la possibilité de modéliser presque tout type de système racinaire.
 De plus, les différentes relations impliquant les diamètres ont pour la plupart le soutien de différentes études validant son impact sur l'intensité des processus du modèle.
-ArchiSimple offre ainsi une approche intéressante, aisée et rapide à la construction d'architecture racinaire.
+ArchiSimple offre ainsi une approche intéressante, aisée et rapide à la construction d'architectures racinaires.
 Cependant, il est apparu dans ce travail que ArchiSimple peut être un peu lacunaire sur certains points.
 Celui-ci n'avait pas la prétention de pouvoir remplacer d'autres modèles déjà existants mais plutôt de proposer un modèle versatile qui permet la modélisation de quasiment n'importe quel système racinaire sur la base d'un minimum d'input facilement mesurable.
 Les lacunes observées pénalisent principalement la modélisation de système racinaire adventif qui est assez restrictive.
 \newline
 
 Tout d'abord, et le plus impactant dans le contexte de ce travail, la façon de définir le diamètre des racines adventives ne correspond pas au développement des Poaceae comme le maïs ou le sorgho.
-Ces deux plantes, modélisées précédemment dans ce document, présentent une succession de nœuds qui donne lieu à des racines adventives.
-Les échantillons récupérés en champs indiquent que le diamètre des racines nodales émises est croissant au fur et à mesure que les nœuds apparaissent.
+Ces deux plantes, modélisées précédemment dans ce document, présentent une succession de nœuds qui donnent lieu à des racines adventives.
+Les échantillons récupérés en champs indiquent que le diamètre des racines adventives émises est croissant au fur et à mesure que les nœuds apparaissent.
 Cela est visible dans la figure \ref{fig:node_dia} qui présente les diamètres observés en fonction du nœud dont provient la racine adventive.
 Le cinquième nœud est le plus haut sur la tige et donc le plus jeune suivi du quatrième et ainsi de suite.
 Le premier nœud rassemble alors l'ensemble des racines nodales les plus anciennes dont le nœud d'origine était difficilement déterminable visuellement.
-On observe assez aisément l'évolution du diamètre des racines adventives en accord avec le nœud duquel elles sont émises.
+L'évolution du diamètre des racines adventives en accord avec le nœud duquel elles sont émises est aisément observable.
 
 \begin{figure}[ht]
 \centering
@@ -110,7 +110,7 @@ Cela est particulièrement restrictif dans le cas du maïs et du sorgho ou ces r
 Cet inconvénient a été contourné en calibrant le paramètre dAdv sur le diamètre moyen des racines adventives.
 De cette façon, le système racinaire reste cohérent, mais cela éclipse totalement les variabilités qui seraient observables parmi les diamètres racinaires.
 Les premières racines, normalement plus fines, bénéficient d'une certaine avance pour s'étendre alors que les racines plus jeunes devraient bénéficier d'une vitesse de croissance plus importante au vu de leur diamètre plus important et cela n'est pas du tout pris en compte.
-Il résulte alors que des racines avec un diamètre moyen sont émises dès le début développement racinaire.
+Il résulte alors que des racines avec un diamètre moyen sont émises dès le début du développement racinaire.
 Celles-ci atteignent alors des longueurs trop importantes.
 Il serait intéressant d'introduire un paramètre évaluant l'évolution du diamètre des racines adventives en fonction du moment de leurs émissions.
 \newline
@@ -126,7 +126,7 @@ Cela amène à considérer la possibilité que l'élongation potentielle n'est p
 En effet, le paramètre EL, considéré comme étant linéaire, n'a pas été observé comme tel par \cite{pellerinand_evaluation_1994}.
 Dans le cas présent (et probablement courant) où celui-ci est estimé sur base de racines de diamètres assez faibles, cela pousse la relation du processus d'élongation $PER = EL*D$ (simplification de l'équation \ref{eq:PER}) à estimer une élongation potentielle bien trop importante pour les racines avec des diamètres plus importants.
 En outre, la croissance devrait ralentir avec l'âge et la profondeur de la racine tel qu'observé par \cite{pellerinand_evaluation_1994}.
-Plusieurs hypothèses justifie cette diminution de l'élongation racinaire.
+Plusieurs hypothèses justifient cette diminution de l'élongation racinaire.
 Cela pourrait provenir du fait que de moins en moins de carbohydrates sont acheminés au plus on s'éloigne des parties aériennes, ou encore des conditions physiques et chimiques rencontrées plus en profondeur.
 \newline
 
@@ -146,7 +146,7 @@ Plusieurs études lient le développement racinaire au développement aérien, l
 
 Si les printemps secs et les étés déficitaires en eau incitent aux cultures de sorgho, il est encore prématuré de considérer le sorgho comme un candidat pour de grandes cultures en Belgique.
 La sélection variétale ne permet pas à ce jour d'assurer qu'une culture de sorgho arrive à terme sans aucun problème.
-En effet, le maïs, qui a l'avantage d'être moins exigeant en températures que le sorgho, conserve des rendements plus intéressant à ce jour dans des régions où l'on peut encore observer des années plus fraîches.
+En effet, le maïs, qui a l'avantage d'être moins exigeant en températures que le sorgho, conserve des rendements plus intéressants à ce jour dans des régions où l'on peut encore observer des années plus fraîches.
 L'amélioration et la sélection végétale, encore susceptibles à de nombreux progrès pour le sorgho, pourraient permettre d'élargir la gamme de conditions climatiques adaptées à cette culture.
 Néanmoins, les trajectoires climatiques promises actuellement pourraient en faire une alternative incontournable dans les régions ou le maïs souffrirait de manque d'eau.
 Il pourrait également s'imposer, à une échelle plus modérée, dans des pays comme la Belgique si ses rendements viennent à concurrencer ceux du maïs tout en étant plus résilient.
@@ -159,18 +159,18 @@ Ces traits peuvent alors participer à orienter la sélection génétique d'autr
 \subsection{Perspective}
 
 L'architecture du système racinaire n'est qu'une étape dans un pipeline permettant de modéliser et de comprendre l'absorption d'eau racinaire et les flux hydriques au sein des plantes.
-Les résultats de ArchiSimple est dès lors conçu pour être utilisé par autre modèle permettant d'ajouter une nouvelle dimension qui influence les flux hydriques.
+Le résultat de ArchiSimple est dès lors conçu pour être utilisé par autre modèle permettant d'ajouter une nouvelle dimension qui influence les flux hydriques.
 L'architecture générée pourrait par exemple, conjointement avec, entre autre les conductivités axiale et radiale, servir d'input au modèle MARSHALL pour obtenir l'architecture hydraulique du système racinaire.
 Les résultats de modélisation obtenus lors de ce travail ne représentent donc pas une fin en soi, mais bien un pas dans un pipeline.
 \newline
 
 Les modélisations présentées dans ce travail sont cohérentes, mais semblent omettre beaucoup de caractéristiques de l'architecture racinaire du sorgho, notamment dans le développement de celle-ci.
-Il serait dès lors adéquat d'estimer plus précisément les paramètres qui n'ont pas pu être observés sur les échantillons récupérer.
-Ces paramètres demandent d'autres expériences assez variées afin d'estimer ces paramètres plus difficilement observables.
+Il serait dès lors adéquat d'estimer plus précisément les paramètres qui n'ont pas pu être observés sur les échantillons récupérés.
+Ces paramètres demandent d'autres expériences assez variées afin d'observer des processus plus difficilement observables.
 \newline
 
 Pour finir, le modèle lui-même est contraignant pour pouvoir représenter un système racinaire fasciculé construit sur des racines adventives comme le sorgho ou le maïs.
-ArchiSimple paraît intéressant et est déjà très versatile pour construire bon nombre de systèmes racinaires, mais il est nécessaire d'améliorer le processus d'émissions de racines adventives.
+Archisimple paraît intéressant et est déjà très versatile pour construire bon nombre de systèmes racinaires, mais il est nécessaire d'améliorer le processus d'émissions de racines adventives.
 Ce processus occupe une place centrale pour les systèmes racinaires considérés dans ce travail et le fait qu'il ne considère qu'un seul diamètre a des répercussions qui se sont avérées critiques dans le modèle.
 Le processus d'émission de racines adventives pourrait être amélioré en permettant une augmentation progressive des diamètres des racines adventive émises.
 Cette augmentation pourrait se faire sur base du nombre de racines déjà émises, du diamètre de la racine primaire et de Dmax.
@@ -184,12 +184,12 @@ Il serait alors possible d'ajouter une équation similaire à l'équation \ref{e
 \end{equation}
 Avec :
 \begin{itemize}
-    \item dprim : le diamètre de la racine primaire (i.e. dmax*dsem dans ArchiSimple)
+    \item dprim : le diamètre de la racine primaire (i.e. dmax*dsem dans Archisimple)
     \item dAdv : le diamètre de la racine adventive émise
     \item nAdv : le nombre de racines déjà émises
 \end{itemize}
 dAdv serait alors calculé au sein du modèle et ne serait plus nécessaire en input.
-La première racine adventive aurait dans ce cas un diamètre proche de celui observé sur la racine primaire et augmenterait linéairement avec le nombre d'adventives déjà émisent pour, à terme, atteindre dmax.
+La première racine adventive aurait dans ce cas un diamètre proche de celui observé sur la racine primaire et augmenterait linéairement avec le nombre de racines adventives déjà émises pour, à terme, atteindre dmax.
 Toutefois, cette proposition convient à toutes les espèces si certaines conditions sont remplies. 
 La première est qu'il faut effectivement observer une augmentation des diamètres de racines adventives.
 La seconde est qu'il faut que le diamètre maximal soit observé sur une racine adventive.
