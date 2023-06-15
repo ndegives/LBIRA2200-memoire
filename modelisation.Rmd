@@ -68,24 +68,24 @@ ArchiSimple <- function(par,exporttype,time) {
 }
 ```
 
-## Plot tout les 5 jours
+## Plot racine 
 
 ```{r, echo=TRUE}
 # Fonction qui fait un plot pour chaque jour jusqu'à jour max
-time_plot <- function(data, variety) {
-  for (i in 1:8) {
+time_plot <- function(data, variety,time) {
+  for (i in time) {
     print(i)
-    print(paste('Plot pour',variety,'jour',i*5))
+    print(paste('Plot pour',variety,'jour',i))
     print(
-      filter(data,sim==variety, Jour <= i*5) %>%
+      filter(data,sim==variety, Jour <= i) %>%
         ggplot() +
         theme_classic() +
         geom_segment(aes(x = X1, y = -Z1, xend = X2, yend = -Z2, color=Diam), alpha=0.9) +
         scale_x_continuous(limits=c(-500,+500)) +
         scale_y_continuous(limits = c(-2000, 0)) +
-        scale_color_viridis(limits=c(0,2.5),option = "turbo") +
+        scale_color_viridis(limits=c(0,7),option = "turbo") +
         coord_fixed()+
-        labs(title=paste(variety,'jour',i*5),col='Diamètre')
+        labs(title=paste(variety,'jour',i),col='Diamètre')
     )
   }
   }
@@ -126,13 +126,14 @@ for (variety in c('Amiggo','Biggben','Hyperion','Juno','Swingg','Vegga')) {
   sims <- rbind(sims,rs)
 }
 setwd("../../../") 
+time_plot(sims,'Amiggo',time=c(40))
 ```
 
 ### Plot
 
 ```{r, echo=TRUE}
 for (variety in levels(sims$sim)) {
-  time_plot(sims,variety = variety)
+  time_plot(sims,variety = variety, time=c(max(sims$Jour)))
   print(paste('La profondeur max du système racinaire après 40 jours=',max(subset(sims,sim==variety)$Z1),'[mm]'))
   print(paste0('Le système racinaire après 40 jours s étend de',min(subset(sims,sim==variety)$X1),'[mm] à ',max(subset(sims,sim==variety)$X1),'[mm] soit une largeur totale de :',
                max(subset(sims,sim==variety)$X1)-min(subset(sims,sim==variety)$X1),'[mm]'))
@@ -179,7 +180,7 @@ params_maize <- data.frame(
 ## Run le modèle .txt
 
 ```{r, echo=TRUE}
-ArchiSimple(par=params_maize,exporttype = 1,time = 40)
+ArchiSimple(par=params_maize,exporttype = 1,time = c(40))
 ```
 
 ## Résultats de la modélisation
@@ -194,7 +195,7 @@ setwd("../../../")
 ### Plot
 
 ```{r, echo=TRUE}
-time_plot(data = maize,variety = 'maize')
+time_plot(data = maize,variety = 'maize',time=40)
 print(paste('La profondeur max du système racinaire=',max(maize$Z1),'[mm]'))
 print(paste0('Le système racinaire s étend de',min(maize$X1),'[mm] à ',max(maize$X1),'[mm] soit une largeur totale de :', max(maize$X1)-min(maize$X1),'[mm]'))
 print(paste('Le diamètre moyen des racines est =',mean(maize$Diam)))
