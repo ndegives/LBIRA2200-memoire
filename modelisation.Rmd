@@ -198,7 +198,7 @@ setwd("../../../")
 ### Plot
 
 ```{r, echo=TRUE}
-time_plot(data = maize,variety = 'maize',time=c(40))
+time_plot(data = maize,variety = 'maize',time=c(10,15,20,25,30,35,40))
 print(paste('La profondeur max du système racinaire=',max(maize$Z1),'[mm]'))
 print(paste0('Le système racinaire s étend de',min(maize$X1),'[mm] à ',max(maize$X1),'[mm] soit une largeur totale de :', max(maize$X1)-min(maize$X1),'[mm]'))
 print(paste('Le diamètre moyen des racines est =',mean(maize$Diam)))
